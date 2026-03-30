@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CCAI Application | Imogen Feenan</title>
+  <meta name="description" content="What running CCAI's operations could look like — a bespoke application brief by Imogen Feenan for the Director of Operations & Projects role at Climate Change AI.">
+  <meta property="og:title" content="CCAI Application | Imogen Feenan">
+  <meta property="og:description" content="What running CCAI's operations could look like — a bespoke application brief for the Director of Operations & Projects role.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --forest: #3B5249;
+      --sage: #7A9E7E;
+      --sage-light: #C8D9C2;
+      --sage-wash: #E8F0E4;
+      --terracotta: #C07A5C;
+      --terracotta-light: #EEDAD0;
+      --clay: #B8937A;
+      --sand: #F5EDE4;
+      --stone: #E8DDD3;
+      --warm-white: #FAF7F2;
+      --charcoal: #3A3A38;
+      --mid: #7A7873;
+      --light-mid: #A8A49E;
+      --card-bg: #FFFFFF;
+      --border: rgba(0,0,0,0.06);
+      --teal: #2A9D8F;
+      --teal-light: #D4EDEB;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--charcoal);
+      background: var(--warm-white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      padding: 0 2rem;
+      transition: background 0.4s, border-color 0.4s, box-shadow 0.3s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom-color: var(--border);
+      box-shadow: 0 2px 20px rgba(59, 82, 73, 0.04);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem; color: var(--forest);
+      text-decoration: none;
+      transition: color 0.4s;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--mid);
+      font-size: 0.88rem; font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--sage); }
+
+    /* ─── MOBILE MENU ─── */
+    .menu-toggle {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      width: 32px; height: 32px;
+      position: relative;
+      z-index: 110;
+    }
+    .menu-toggle span {
+      display: block; width: 22px; height: 2px;
+      background: var(--forest);
+      position: absolute; left: 5px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .menu-toggle span:nth-child(1) { top: 9px; }
+    .menu-toggle span:nth-child(2) { top: 15px; }
+    .menu-toggle span:nth-child(3) { top: 21px; }
+    .menu-toggle.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 90vh;
+      display: flex; align-items: center;
+      padding: 8rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--warm-white);
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: center;
+      position: relative; z-index: 1;
+    }
+    .hero-text h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.2rem; line-height: 1.15;
+      color: var(--forest);
+      margin-bottom: 1.5rem;
+    }
+    .hero-text h1 span { color: var(--sage); }
+    .hero-text p {
+      font-size: 1.1rem; color: var(--mid);
+      max-width: 480px; margin-bottom: 2rem;
+    }
+    .hero-cta {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: var(--forest);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hero-cta:hover {
+      background: var(--sage);
+      transform: translateY(-1px);
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 30px rgba(59, 82, 73, 0.04);
+    }
+    .hero-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem; color: var(--forest);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 2px solid var(--sage-light);
+    }
+    .deliverable-list { list-style: none; }
+    .deliverable-list li {
+      padding: 0.6rem 0;
+      font-size: 0.95rem;
+      color: var(--charcoal);
+      display: flex; align-items: flex-start; gap: 0.7rem;
+    }
+    .deliverable-list li::before {
+      content: '';
+      display: block;
+      width: 6px; height: 6px;
+      background: var(--sage);
+      border-radius: 50%;
+      margin-top: 0.55rem;
+      flex-shrink: 0;
+    }
+
+    /* ─── SECTION COMMON ─── */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.2rem; color: var(--forest);
+      margin-bottom: 1rem;
+    }
+    .section-intro {
+      font-size: 1.05rem; color: var(--mid);
+      max-width: 680px; margin-bottom: 3rem;
+    }
+
+    /* ─── ABOUT CCAI ─── */
+    #about {
+      background: var(--warm-white);
+      position: relative;
+    }
+    .about-content {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      align-items: start;
+    }
+    .about-text p { margin-bottom: 1rem; color: var(--charcoal); font-size: 0.98rem; }
+    .about-aside {
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--sage-light);
+      border-radius: 2px 12px 12px 2px;
+      padding: 2rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .about-aside h4 {
+      font-size: 0.85rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--forest); margin-bottom: 1rem;
+    }
+    .framework-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tag {
+      padding: 0.35rem 0.8rem;
+      background: var(--sage-wash);
+      color: var(--forest);
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    /* ─── DASHBOARD ─── */
+    #dashboard {
+      background: var(--sand);
+      position: relative;
+    }
+    .stat-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.75);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: relative;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute; top: 0; left: 1.5rem; right: 1.5rem;
+      height: 3px; border-radius: 0 0 3px 3px;
+    }
+    .stat-card:nth-child(1)::before { background: var(--sage); }
+    .stat-card:nth-child(2)::before { background: var(--terracotta); }
+    .stat-card:nth-child(3)::before { background: var(--forest); }
+    .stat-card:nth-child(4)::before { background: var(--teal); }
+
+    .stat-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem; font-weight: 700;
+      color: var(--forest);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-unit {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* Dashboard sub-sections */
+    .dashboard-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .dashboard-card {
+      background: rgba(255,255,255,0.75);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .dashboard-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem; color: var(--forest);
+      margin-bottom: 1.5rem;
+    }
+    .chart-container {
+      position: relative;
+      height: 220px;
+    }
+
+    /* Bar rows */
+    .bar-section { margin-top: 0.5rem; }
+    .bar-row {
+      display: flex; align-items: center; gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .bar-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; font-weight: 600;
+      color: var(--charcoal);
+      min-width: 70px;
+      letter-spacing: 0.05em;
+    }
+    .bar-track {
+      flex: 1;
+      height: 20px;
+      background: var(--stone);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      width: 0;
+      transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .bar-fill.animated { width: var(--target-width); }
+    .bar-fill.sage { background: var(--sage); }
+    .bar-fill.terracotta { background: var(--terracotta); }
+    .bar-fill.teal { background: var(--teal); }
+    .bar-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; font-weight: 600;
+      color: var(--mid);
+      min-width: 50px;
+      text-align: right;
+    }
+
+    /* SVG Map */
+    .map-card {
+      background: rgba(255,255,255,0.75);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .map-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem; color: var(--forest);
+      margin-bottom: 1.5rem;
+    }
+    .map-container {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .map-container svg {
+      width: 100%;
+      max-width: 700px;
+      height: auto;
+    }
+    .map-stats {
+      display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+    }
+    .map-stat {
+      text-align: center;
+    }
+    .map-stat-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--forest);
+    }
+    .map-stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .dashboard-source {
+      font-size: 0.78rem;
+      color: var(--light-mid);
+      text-align: center;
+      margin-top: 2rem;
+      font-style: italic;
+    }
+
+    /* ─── OPERATIONAL ANALYSIS ─── */
+    #analysis {
+      background: var(--warm-white);
+    }
+    .how-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+    }
+    .how-card {
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .how-card::before {
+      content: '';
+      position: absolute; top: 0; left: 2rem; right: 2rem;
+      height: 3px; border-radius: 0 0 3px 3px;
+    }
+    .how-card:nth-child(1)::before { background: var(--sage); }
+    .how-card:nth-child(2)::before { background: var(--clay); }
+    .how-card:nth-child(3)::before { background: var(--terracotta); }
+    .how-card .card-stat {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.8rem;
+    }
+    .how-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem; color: var(--forest);
+      margin-bottom: 0.8rem;
+    }
+    .how-card p { font-size: 0.92rem; color: var(--mid); }
+
+    /* ─── EXPERIENCE ─── */
+    #experience {
+      background: var(--sand);
+    }
+    .experience-content {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      align-items: start;
+    }
+    .experience-text p { margin-bottom: 1rem; color: var(--charcoal); font-size: 0.98rem; }
+    .experience-text strong { color: var(--forest); }
+
+    /* ─── 90 DAYS ─── */
+    #ninety-days {
+      background: var(--warm-white);
+    }
+    .timeline-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+    }
+    .timeline-card {
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .timeline-card::before {
+      content: '';
+      position: absolute; top: 0; left: 2rem; right: 2rem;
+      height: 3px; border-radius: 0 0 3px 3px;
+    }
+    .timeline-card:nth-child(1)::before { background: var(--sage); }
+    .timeline-card:nth-child(2)::before { background: var(--clay); }
+    .timeline-card:nth-child(3)::before { background: var(--terracotta); }
+    .phase-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.6rem;
+    }
+    .timeline-card:nth-child(2) .phase-label { color: var(--clay); }
+    .timeline-card:nth-child(3) .phase-label { color: var(--terracotta); }
+    .timeline-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem; color: var(--forest);
+      margin-bottom: 1rem;
+    }
+    .timeline-card ul {
+      list-style: none;
+    }
+    .timeline-card li {
+      padding: 0.4rem 0;
+      font-size: 0.9rem;
+      color: var(--mid);
+      display: flex; align-items: flex-start; gap: 0.6rem;
+    }
+    .timeline-card li::before {
+      content: '';
+      display: block;
+      width: 5px; height: 5px;
+      background: var(--sage-light);
+      border-radius: 50%;
+      margin-top: 0.55rem;
+      flex-shrink: 0;
+    }
+    .caveat {
+      margin-top: 2rem;
+      font-size: 0.88rem;
+      color: var(--light-mid);
+      font-style: italic;
+      max-width: 680px;
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-bg {
+      background: var(--forest);
+      color: white;
+      position: relative;
+    }
+    .contact-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative; z-index: 1;
+    }
+    .contact-inner .section-label { color: var(--sage-light); }
+    .contact-inner .section-title { color: white; }
+    .contact-inner p { color: rgba(255,255,255,0.7); margin-bottom: 2rem; font-size: 1.05rem; }
+    .contact-buttons {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    }
+    .contact-btn {
+      display: inline-block;
+      padding: 0.8rem 2.5rem;
+      border: 2px solid var(--sage-light);
+      color: var(--sage-light);
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .contact-btn:hover { background: var(--sage-light); color: var(--forest); }
+    .contact-details {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--light-mid);
+      background: var(--warm-white);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-text h1 { font-size: 2.4rem; }
+      .about-content { grid-template-columns: 1fr; }
+      .experience-content { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .how-grid { grid-template-columns: 1fr; }
+      .timeline-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 1.2rem; }
+    }
+
+    @media (max-width: 600px) {
+      .hero { min-height: auto; padding: 6rem 1.2rem 3rem; }
+      .hero-text h1 { font-size: 1.8rem; }
+      .hero-text p { font-size: 1rem; }
+      section { padding: 3rem 1.2rem; }
+      .section-title { font-size: 1.6rem; }
+      .hero-card { padding: 1.5rem; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .stat-number { font-size: 1.6rem; }
+
+      /* Mobile menu */
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(250, 247, 242, 0.98);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 2rem;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1.2rem; }
+    }
+
+    /* ─── ANIMATION ─── */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="https://imogenfeenan.com" class="nav-name">Imogen Feenan</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About CCAI</a></li>
+        <li><a href="#dashboard">Impact data</a></li>
+        <li><a href="#analysis">Operational analysis</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#ninety-days">90-day plan</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text fade-up">
+        <h1>What running CCAI's <span>operations</span> could look like.</h1>
+        <p>This is how I'd approach the first year as CCAI's Director of Operations &amp; Projects — based on your public work, your team structure, and the gaps that matter most at your stage of growth.</p>
+        <a href="#contact" class="hero-cta">Let's talk</a>
+      </div>
+      <div class="hero-card fade-up" style="transition-delay: 0.15s;">
+        <h3>What this site is</h3>
+        <ul class="deliverable-list">
+          <li>A bespoke application brief for the Director of Operations &amp; Projects role at Climate Change AI</li>
+          <li>A live dashboard built from CCAI's public data — demonstrating the kind of impact reporting the role requires</li>
+          <li>An operational diagnosis identifying where investment would compound CCAI's impact most</li>
+          <li>A first 90 days sketch showing how I'd approach the role from day one</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT CCAI -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-label fade-up">About CCAI</div>
+      <h2 class="section-title fade-up">A research organisation at an inflection point</h2>
+      <div class="about-content">
+        <div class="about-text fade-up">
+          <p>Climate Change AI is a global nonprofit that catalyses impactful work at the intersection of climate change and machine learning. Founded in June 2019 by David Rolnick, Lynn Kaack, and Priya Donti, CCAI launched with a landmark 60-page paper — <em>Tackling Climate Change with Machine Learning</em> — that mapped the full landscape of ML applications for climate action and set the agenda for the field.</p>
+          <p>Since incorporating as a 501(c)(3) in 2021, CCAI has grown into a genuinely global operation. The organisation runs workshops at every major ML conference (six consecutive years at NeurIPS, four at ICLR), a summer school programme that grew from 73 selected participants in 2022 to over 10,000 virtual registrants across 160+ countries in 2023, and an Innovation Grants programme that has funded 23 projects across 62 institutions in 22 countries.</p>
+          <p>What makes CCAI operationally distinctive — and challenging — is its model. A small core of paid staff coordinates a distributed volunteer network of 50+ researchers and practitioners across five continents. This is a high-impact, low-overhead structure, but it depends entirely on the quality of its operational infrastructure: coordination systems, onboarding processes, reporting pipelines, and the back-end that holds it all together.</p>
+          <p>CCAI is at the stage where its ambition has outpaced its operational capacity. The programmes are working. The community is growing. What it needs now is someone who can build the systems that let it scale without losing coherence.</p>
+        </div>
+        <div class="about-aside fade-up" style="transition-delay: 0.1s;">
+          <h4>Research domains</h4>
+          <div class="framework-tags">
+            <span class="tag">Agriculture &amp; Food</span>
+            <span class="tag">Power &amp; Energy</span>
+            <span class="tag">Buildings &amp; Cities</span>
+            <span class="tag">Transportation</span>
+            <span class="tag">Ecosystems &amp; Biodiversity</span>
+            <span class="tag">Disaster Management</span>
+            <span class="tag">Climate Science</span>
+          </div>
+          <h4>Core programmes</h4>
+          <div class="framework-tags">
+            <span class="tag">NeurIPS Workshops</span>
+            <span class="tag">ICLR Workshops</span>
+            <span class="tag">Summer Schools</span>
+            <span class="tag">Innovation Grants</span>
+            <span class="tag">Policy Reports</span>
+          </div>
+          <h4>Co-founders</h4>
+          <div class="framework-tags">
+            <span class="tag">David Rolnick</span>
+            <span class="tag">Lynn Kaack</span>
+            <span class="tag">Priya Donti</span>
+          </div>
+          <h4>Key funders</h4>
+          <div class="framework-tags" style="margin-bottom: 0;">
+            <span class="tag">Quadrature Climate Foundation</span>
+            <span class="tag">Schmidt Futures</span>
+            <span class="tag">Google DeepMind</span>
+            <span class="tag">Global Methane Hub</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT DASHBOARD -->
+  <section id="dashboard">
+    <div class="section-inner">
+      <div class="section-label fade-up">Impact data</div>
+      <h2 class="section-title fade-up">CCAI by the numbers</h2>
+      <p class="section-intro fade-up">A snapshot of CCAI's reach and output, built from publicly available data. This is the kind of impact reporting infrastructure the Director of Operations role would own.</p>
+
+      <!-- Stat Cards -->
+      <div class="stat-grid fade-up">
+        <div class="stat-card">
+          <div class="stat-number" data-target="600" data-suffix="+">0</div>
+          <div class="stat-unit">Workshop papers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="23">0</div>
+          <div class="stat-unit">Funded projects</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="1.4" data-prefix="$" data-suffix="M" data-decimals="1">0</div>
+          <div class="stat-unit">Annual grants</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="160" data-suffix="+">0</div>
+          <div class="stat-unit">Countries reached</div>
+        </div>
+      </div>
+
+      <!-- Charts row -->
+      <div class="dashboard-grid fade-up">
+        <!-- Summer school growth -->
+        <div class="dashboard-card">
+          <h3>Summer school growth</h3>
+          <div class="chart-container">
+            <canvas id="summerSchoolChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Workshop presence -->
+        <div class="dashboard-card">
+          <h3>Workshop presence at major ML conferences</h3>
+          <div class="bar-section">
+            <div class="bar-row">
+              <span class="bar-label">NeurIPS</span>
+              <div class="bar-track">
+                <div class="bar-fill sage" style="--target-width: 100%;"></div>
+              </div>
+              <span class="bar-value">6 yrs</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">ICLR</span>
+              <div class="bar-track">
+                <div class="bar-fill terracotta" style="--target-width: 67%;"></div>
+              </div>
+              <span class="bar-value">4 yrs</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">ICML</span>
+              <div class="bar-track">
+                <div class="bar-fill teal" style="--target-width: 33%;"></div>
+              </div>
+              <span class="bar-value">2 yrs</span>
+            </div>
+          </div>
+          <div style="margin-top: 1.5rem;">
+            <h3 style="margin-bottom: 1rem;">Grants programme reach</h3>
+            <div class="bar-row">
+              <span class="bar-label">Projects</span>
+              <div class="bar-track">
+                <div class="bar-fill sage" style="--target-width: 37%;"></div>
+              </div>
+              <span class="bar-value">23</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">Institutions</span>
+              <div class="bar-track">
+                <div class="bar-fill sage" style="--target-width: 100%;"></div>
+              </div>
+              <span class="bar-value">62</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">Countries</span>
+              <div class="bar-track">
+                <div class="bar-fill sage" style="--target-width: 35%;"></div>
+              </div>
+              <span class="bar-value">22</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="map-card fade-up">
+        <h3>Global reach</h3>
+        <div class="map-container">
+          <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simplified world map showing CCAI's global presence across five continents">
+            <!-- Simplified continent outlines -->
+            <!-- North America -->
+            <path d="M 120 80 L 180 60 L 260 70 L 280 100 L 300 130 L 280 160 L 260 200 L 240 220 L 200 240 L 170 230 L 140 200 L 120 160 L 100 120 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <!-- Central America -->
+            <path d="M 200 240 L 220 260 L 230 290 L 210 300 L 190 280 L 180 260 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <!-- South America -->
+            <path d="M 230 290 L 260 300 L 290 330 L 300 370 L 290 410 L 270 440 L 250 450 L 230 430 L 220 390 L 210 350 L 220 320 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <!-- Europe -->
+            <path d="M 440 70 L 480 60 L 520 65 L 540 80 L 530 110 L 510 130 L 490 140 L 470 130 L 450 120 L 430 100 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <!-- Africa -->
+            <path d="M 460 160 L 500 150 L 540 160 L 560 200 L 570 250 L 560 300 L 540 340 L 520 370 L 500 380 L 480 370 L 460 340 L 450 300 L 440 250 L 440 200 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <!-- Asia -->
+            <path d="M 540 60 L 600 50 L 680 55 L 760 70 L 820 90 L 840 120 L 830 150 L 800 170 L 760 180 L 720 170 L 680 160 L 640 150 L 600 140 L 570 130 L 550 110 L 540 80 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <!-- South/Southeast Asia -->
+            <path d="M 640 160 L 680 170 L 720 180 L 740 200 L 760 230 L 740 250 L 710 240 L 680 220 L 650 200 L 640 180 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <!-- Oceania -->
+            <path d="M 780 300 L 830 290 L 870 310 L 880 340 L 870 370 L 840 380 L 810 370 L 790 350 L 780 330 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <!-- Key hubs -->
+            <circle cx="230" cy="130" r="5" fill="var(--forest)" opacity="0.7"/>
+            <text x="230" y="120" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--forest)" font-weight="600">MONTREAL</text>
+            <circle cx="490" cy="100" r="4" fill="var(--terracotta)" opacity="0.7"/>
+            <circle cx="680" cy="120" r="4" fill="var(--terracotta)" opacity="0.7"/>
+            <circle cx="830" cy="340" r="4" fill="var(--terracotta)" opacity="0.7"/>
+            <circle cx="500" cy="300" r="4" fill="var(--terracotta)" opacity="0.7"/>
+            <circle cx="260" cy="350" r="4" fill="var(--terracotta)" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="map-stats">
+          <div class="map-stat">
+            <div class="map-stat-num">62</div>
+            <div class="map-stat-label">Institutions</div>
+          </div>
+          <div class="map-stat">
+            <div class="map-stat-num">22</div>
+            <div class="map-stat-label">Countries</div>
+          </div>
+          <div class="map-stat">
+            <div class="map-stat-num">5</div>
+            <div class="map-stat-label">Continents</div>
+          </div>
+          <div class="map-stat">
+            <div class="map-stat-num">50+</div>
+            <div class="map-stat-label">Core volunteers</div>
+          </div>
+          <div class="map-stat">
+            <div class="map-stat-num">40+</div>
+            <div class="map-stat-label">Partner orgs</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="dashboard-source fade-up">Dashboard built from publicly available sources. Data current as of March 2026.</p>
+    </div>
+  </section>
+
+  <!-- OPERATIONAL ANALYSIS -->
+  <section id="analysis">
+    <div class="section-inner">
+      <div class="section-label fade-up">Operational analysis</div>
+      <h2 class="section-title fade-up">Three opportunities for CCAI's next phase</h2>
+      <p class="section-intro fade-up">Based on CCAI's public work, team structure, and the JD for this role, these are the three areas where operational investment would compound impact most.</p>
+      <div class="how-grid">
+        <div class="how-card fade-up">
+          <div class="card-stat">50+ volunteers · 5 continents</div>
+          <h3>Volunteer coordination infrastructure</h3>
+          <p>CCAI runs on a distributed, largely volunteer-driven model. At this scale, ad-hoc coordination creates drag. Core team members commit 5–10 hours per week across different time zones with varying levels of engagement. A well-designed CRM and onboarding system — with clear role definitions, structured pathways from application to active contribution, and lightweight retention tracking — would reduce coordinator burden and compound impact across every programme. The JD explicitly asks for CRM design and volunteer recruitment. This is foundational.</p>
+        </div>
+        <div class="how-card fade-up" style="transition-delay: 0.1s;">
+          <div class="card-stat">4 programme streams · 23 projects</div>
+          <h3>Programmatic impact tracking</h3>
+          <p>CCAI runs grants, events, summer schools, and policy work simultaneously — each with different impact metrics, reporting timelines, and stakeholder audiences. The ability to evaluate impact across these streams consistently, comparably, and in a way that feeds back into strategy is under-resourced at most organisations at this stage. A unified reporting framework would serve three purposes: funder reporting, board-level strategic insight, and public-facing transparency. The dashboard on this page is a proof of concept for that kind of system.</p>
+        </div>
+        <div class="how-card fade-up" style="transition-delay: 0.2s;">
+          <div class="card-stat">501(c)(3) since 2021</div>
+          <h3>Back-end infrastructure for scale</h3>
+          <p>Legal, financial, and logistical infrastructure built for a small startup doesn't scale cleanly. As CCAI's programmes grow — especially the Innovation Grants programme managing $1.4M annually across 22 countries — getting the back-end right becomes foundational. This means financial controls, procurement processes, contract templates for international grantees, and documentation that lets institutional knowledge survive staff transitions. None of this is glamorous. All of it is load-bearing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELEVANT EXPERIENCE -->
+  <section id="experience">
+    <div class="section-inner">
+      <div class="section-label fade-up">Relevant experience</div>
+      <h2 class="section-title fade-up">What I bring to this</h2>
+      <p class="section-intro fade-up">Not a CV — a direct mapping of my experience to the three operational opportunities above.</p>
+      <div class="experience-content">
+        <div class="experience-text fade-up">
+          <p><strong>Multi-stakeholder programme delivery.</strong> At Economist Impact, I managed multi-country research programmes involving governments, NGOs, academic institutions, and private sector partners across different geographies and time zones. This is the same coordination challenge CCAI faces with its volunteer network and global programme portfolio — and I've done it at the level where budgets, timelines, and stakeholder relationships all have to hold together simultaneously.</p>
+          <p><strong>Research rigour meets operational delivery.</strong> My career has two threads that reinforce each other: deep analytical work (evidence synthesis, policy research, sustainability frameworks) and hands-on operational delivery (programme management, budget management, cross-functional coordination). This combination is rare and directly relevant to a role that requires both building reporting systems and running programmes.</p>
+          <p><strong>AI and climate domain knowledge.</strong> My current academic research — developing a quality assessment framework for AI-assisted Scope 3 emissions estimation — sits squarely at CCAI's intersection of AI and climate action. I understand the technical landscape, the methodological challenges, and the gap between what AI tools promise and what they deliver. This isn't adjacent knowledge — it's direct mission relevance.</p>
+          <p><strong>Independent, remote, self-directed.</strong> I've worked independently across UK, European, and South African contexts for years. I'm used to operating autonomously in distributed teams, flagging issues early, and building my own structure. CCAI's remote-first, globally distributed model is how I already work.</p>
+        </div>
+        <div class="about-aside fade-up" style="transition-delay: 0.1s;">
+          <h4>Programme delivery</h4>
+          <div class="framework-tags">
+            <span class="tag">Multi-stakeholder coordination</span>
+            <span class="tag">Budget management</span>
+            <span class="tag">Cross-functional teams</span>
+            <span class="tag">Global programmes</span>
+          </div>
+          <h4>Research &amp; analysis</h4>
+          <div class="framework-tags">
+            <span class="tag">Evidence synthesis</span>
+            <span class="tag">Policy research</span>
+            <span class="tag">Data analysis</span>
+            <span class="tag">Sustainability frameworks</span>
+          </div>
+          <h4>Operations</h4>
+          <div class="framework-tags">
+            <span class="tag">Process design</span>
+            <span class="tag">Systems thinking</span>
+            <span class="tag">Volunteer coordination</span>
+            <span class="tag">Reporting infrastructure</span>
+          </div>
+          <h4>Domain expertise</h4>
+          <div class="framework-tags" style="margin-bottom: 0;">
+            <span class="tag">AI &amp; climate intersection</span>
+            <span class="tag">Scope 3 estimation</span>
+            <span class="tag">ESG reporting</span>
+            <span class="tag">CSRD / ISSB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIRST 90 DAYS -->
+  <section id="ninety-days">
+    <div class="section-inner">
+      <div class="section-label fade-up">First 90 days</div>
+      <h2 class="section-title fade-up">How I'd approach the role</h2>
+      <p class="section-intro fade-up">A sketch based on public information. The actual plan would be co-developed with the team in the first week.</p>
+      <div class="timeline-grid">
+        <div class="timeline-card fade-up">
+          <div class="phase-label">Days 1–30</div>
+          <h3>Learn</h3>
+          <ul>
+            <li>Deep listening with staff and core volunteers across all time zones</li>
+            <li>Audit existing processes, tools, documentation, and communication channels</li>
+            <li>Map what exists vs. what the JD needs to build — identify the real gaps, not the assumed ones</li>
+            <li>Understand funder reporting requirements and current compliance state</li>
+            <li>Identify 2–3 quick wins that build trust without creating disruption</li>
+          </ul>
+        </div>
+        <div class="timeline-card fade-up" style="transition-delay: 0.1s;">
+          <div class="phase-label">Days 31–60</div>
+          <h3>Design</h3>
+          <ul>
+            <li>Prioritise the 2–3 operational gaps with highest leverage</li>
+            <li>Propose CRM architecture for volunteer coordination and onboarding</li>
+            <li>Design impact tracking framework across programme streams</li>
+            <li>Draft standardised templates for grants administration and reporting</li>
+            <li>Present recommendations to the Executive Director with clear trade-offs</li>
+          </ul>
+        </div>
+        <div class="timeline-card fade-up" style="transition-delay: 0.2s;">
+          <div class="phase-label">Days 61–90</div>
+          <h3>Build</h3>
+          <ul>
+            <li>First operational system live — CRM pilot or reporting dashboard</li>
+            <li>Volunteer onboarding process documented and tested</li>
+            <li>Begin back-end infrastructure review (financial controls, procurement, contracts)</li>
+            <li>Establish regular coordination cadence with volunteer teams</li>
+            <li>Deliver first impact report to demonstrate the new framework</li>
+          </ul>
+        </div>
+      </div>
+      <p class="caveat fade-up">This is a sketch based on public information. The actual plan would be co-developed with the team in the first week — the best operational plans come from listening first, not arriving with answers.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-bg">
+    <div class="section-inner contact-inner">
+      <div class="section-label fade-up">Get in touch</div>
+      <h2 class="section-title fade-up">If this brief is useful, I'd love to continue the conversation.</h2>
+      <p class="fade-up">I'm genuinely excited about what CCAI is building and confident I can help it run better. I'd welcome the chance to discuss these ideas further.</p>
+      <div class="contact-buttons fade-up">
+        <a href="https://imogenfeenan.com" class="contact-btn">imogenfeenan.com</a>
+        <a href="mailto:immyfeenan@gmail.com" class="contact-btn">Email me</a>
+      </div>
+      <div class="contact-details fade-up">
+        Cape Town, South Africa (GMT+2) · Available for remote work globally
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Imogen Feenan. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ─── DATA ───
+    const CCAI_DATA = {
+      summerSchool: [
+        { year: '2022', participants: 73, label: '73 selected participants' },
+        { year: '2023', participants: 10000, label: '10,000+ virtual registrants' },
+        { year: '2024', participants: 34, label: '34 in-person + 1000s virtual', barLabel: '150+ countries' }
+      ],
+      workshops: {
+        neurips: 6, iclr: 4, icml: 2
+      },
+      grants: {
+        projects: 23, institutions: 62, countries: 22, annualFunding: 1.4
+      }
+    };
+
+    // ─── NAV SCROLL ───
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // ─── MOBILE MENU ───
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // ─── FADE-UP OBSERVER ───
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+
+    // ─── STAT NUMBER ANIMATION ───
+    function animateStatNumbers() {
+      document.querySelectorAll('.stat-number[data-target]').forEach(el => {
+        const target = parseFloat(el.dataset.target);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const decimals = parseInt(el.dataset.decimals) || 0;
+        const duration = 1500;
+        const start = performance.now();
+
+        function tick(now) {
+          const t = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - t, 3);
+          const val = ease * target;
+          if (decimals > 0) {
+            el.textContent = prefix + val.toFixed(decimals) + suffix;
+          } else {
+            el.textContent = prefix + Math.round(val).toLocaleString() + suffix;
+          }
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+
+    // Trigger stat animation when dashboard enters view
+    const statGrid = document.querySelector('.stat-grid');
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateStatNumbers();
+          statObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    statObserver.observe(statGrid);
+
+    // ─── BAR FILL ANIMATION ───
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.bar-fill').forEach(bar => {
+            bar.classList.add('animated');
+          });
+          barObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.dashboard-card').forEach(card => {
+      barObserver.observe(card);
+    });
+
+    // ─── CHART.JS — SUMMER SCHOOL GROWTH ───
+    const chartObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          initSummerSchoolChart();
+          chartObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const chartCanvas = document.getElementById('summerSchoolChart');
+    chartObserver.observe(chartCanvas.closest('.dashboard-card'));
+
+    function initSummerSchoolChart() {
+      Chart.defaults.font.family = "'DM Sans', sans-serif";
+
+      new Chart(chartCanvas, {
+        type: 'bar',
+        data: {
+          labels: ['2022', '2023', '2024'],
+          datasets: [{
+            label: 'Summer school reach',
+            data: [73, 10000, 5000],
+            backgroundColor: ['#7A9E7E', '#7A9E7E', '#7A9E7E'],
+            borderRadius: 4,
+            barThickness: 40
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 1200,
+            easing: 'easeOutCubic'
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  const labels = [
+                    '73 selected participants (29 countries)',
+                    '10,000+ virtual registrants (160+ countries)',
+                    '34 in-person + 1000s virtual (150+ countries)'
+                  ];
+                  return labels[ctx.dataIndex];
+                }
+              },
+              backgroundColor: '#3B5249',
+              titleFont: { family: "'JetBrains Mono', monospace", size: 11 },
+              bodyFont: { family: "'DM Sans', sans-serif", size: 12 },
+              padding: 12,
+              cornerRadius: 6
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: { color: 'rgba(0,0,0,0.04)', drawBorder: false },
+              ticks: {
+                font: { family: "'JetBrains Mono', monospace", size: 10 },
+                color: '#A8A49E',
+                callback: function(val) {
+                  if (val >= 1000) return (val / 1000) + 'k';
+                  return val;
+                }
+              }
+            },
+            x: {
+              grid: { display: false },
+              ticks: {
+                font: { family: "'JetBrains Mono', monospace", size: 11, weight: 600 },
+                color: '#7A7873'
+              }
+            }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
