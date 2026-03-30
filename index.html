@@ -4,42 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CCAI Application | Imogen Feenan</title>
-  <meta name="description" content="What running CCAI's operations could look like — a bespoke application brief by Imogen Feenan for the Director of Operations & Projects role at Climate Change AI.">
+  <meta name="description" content="Catalyzing CCAI's strategic ambitions — a bespoke application by Imogen Feenan for the Director of Operations & Projects role at Climate Change AI.">
   <meta property="og:title" content="CCAI Application | Imogen Feenan">
-  <meta property="og:description" content="What running CCAI's operations could look like — a bespoke application brief for the Director of Operations & Projects role.">
+  <meta property="og:description" content="Catalyzing CCAI's strategic ambitions — a bespoke application for the Director of Operations & Projects role.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <style>
     :root {
-      --forest: #3B5249;
-      --sage: #7A9E7E;
-      --sage-light: #C8D9C2;
-      --sage-wash: #E8F0E4;
-      --terracotta: #C07A5C;
-      --terracotta-light: #EEDAD0;
-      --clay: #B8937A;
-      --sand: #F5EDE4;
-      --stone: #E8DDD3;
-      --warm-white: #FAF7F2;
-      --charcoal: #3A3A38;
-      --mid: #7A7873;
-      --light-mid: #A8A49E;
-      --card-bg: #FFFFFF;
-      --border: rgba(0,0,0,0.06);
-      --teal: #2A9D8F;
-      --teal-light: #D4EDEB;
+      --green-primary: #448A79;
+      --green-secondary: #56A591;
+      --blue-primary: #315D89;
+      --blue-secondary: #4A7DB3;
+      --yellow: #DAB524;
+      --dark: #252525;
+      --grey-dark: #3A3A3A;
+      --grey-mid: #757575;
+      --grey-light: #aaaaaa;
+      --white: #fcfcfc;
+      --creme: #F3F2F1;
+      --teal-dark: #264C4B;
+      --hero-start: #1B4F42;
+      --hero-end: #223C57;
+      --border: #eeeeee;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
 
     body {
-      font-family: 'DM Sans', sans-serif;
-      color: var(--charcoal);
-      background: var(--warm-white);
+      font-family: 'Karla', sans-serif;
+      color: var(--grey-dark);
+      background: var(--white);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
@@ -48,17 +46,12 @@
     /* ─── NAV ─── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: transparent;
-      border-bottom: 1px solid transparent;
+      background: var(--dark);
       padding: 0 2rem;
-      transition: background 0.4s, border-color 0.4s, box-shadow 0.3s, backdrop-filter 0.4s;
+      transition: box-shadow 0.3s;
     }
     nav.scrolled {
-      background: rgba(250, 247, 242, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom-color: var(--border);
-      box-shadow: 0 2px 20px rgba(59, 82, 73, 0.04);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
     }
     .nav-inner {
       max-width: 1100px; margin: 0 auto;
@@ -66,19 +59,19 @@
       height: 64px;
     }
     .nav-name {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.15rem; color: var(--forest);
+      font-family: 'Karla', sans-serif;
+      font-size: 0.95rem; font-weight: 500;
+      color: var(--white);
       text-decoration: none;
-      transition: color 0.4s;
+      letter-spacing: 0.04em;
     }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
-      text-decoration: none; color: var(--mid);
-      font-size: 0.88rem; font-weight: 500;
-      letter-spacing: 0.02em;
+      text-decoration: none; color: rgba(252,252,252,0.7);
+      font-size: 0.85rem; font-weight: 400;
       transition: color 0.3s;
     }
-    .nav-links a:hover { color: var(--sage); }
+    .nav-links a:hover { color: var(--white); }
 
     /* ─── MOBILE MENU ─── */
     .menu-toggle {
@@ -90,7 +83,7 @@
     }
     .menu-toggle span {
       display: block; width: 22px; height: 2px;
-      background: var(--forest);
+      background: var(--white);
       position: absolute; left: 5px;
       transition: transform 0.3s, opacity 0.3s;
     }
@@ -103,193 +96,158 @@
 
     /* ─── HERO ─── */
     .hero {
-      min-height: 90vh;
+      min-height: 80vh;
       display: flex; align-items: center;
       padding: 8rem 2rem 5rem;
       position: relative;
       overflow: hidden;
-      background: var(--warm-white);
+      background: var(--teal-dark);
+      color: var(--white);
     }
     .hero-inner {
       max-width: 1100px; margin: 0 auto; width: 100%;
       display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
       align-items: center;
-      position: relative; z-index: 1;
     }
     .hero-text h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 3.2rem; line-height: 1.15;
-      color: var(--forest);
+      font-family: 'Cormorant', serif;
+      font-size: 3rem; line-height: 1.15;
+      font-weight: 500;
+      color: var(--white);
       margin-bottom: 1.5rem;
     }
-    .hero-text h1 span { color: var(--sage); }
     .hero-text p {
-      font-size: 1.1rem; color: var(--mid);
+      font-size: 1rem; color: rgba(252,252,252,0.75);
       max-width: 480px; margin-bottom: 2rem;
+      line-height: 1.8;
     }
     .hero-cta {
       display: inline-block;
-      padding: 0.8rem 2rem;
-      background: var(--forest);
-      color: white;
+      padding: 0.7rem 1.8rem;
+      background: var(--green-primary);
+      color: var(--white);
       text-decoration: none;
-      border-radius: 6px;
+      border-radius: 4px;
       font-weight: 600;
-      font-size: 0.92rem;
-      transition: background 0.2s, transform 0.2s;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: background 0.3s;
     }
     .hero-cta:hover {
-      background: var(--sage);
-      transform: translateY(-1px);
+      background: var(--green-secondary);
     }
 
     .hero-card {
-      background: rgba(255,255,255,0.7);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2.5rem;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 4px 30px rgba(59, 82, 73, 0.04);
+      background: rgba(252,252,252,0.06);
+      border: 1px solid rgba(252,252,252,0.12);
+      padding: 2rem;
     }
     .hero-card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem; color: var(--forest);
+      font-family: 'Cormorant', serif;
+      font-size: 1.2rem; font-weight: 500;
+      color: var(--white);
       margin-bottom: 1.2rem;
       padding-bottom: 0.8rem;
-      border-bottom: 2px solid var(--sage-light);
+      border-bottom: 1px dotted rgba(252,252,252,0.25);
     }
     .deliverable-list { list-style: none; }
     .deliverable-list li {
-      padding: 0.6rem 0;
-      font-size: 0.95rem;
-      color: var(--charcoal);
+      padding: 0.5rem 0;
+      font-size: 0.9rem;
+      color: rgba(252,252,252,0.8);
       display: flex; align-items: flex-start; gap: 0.7rem;
+      line-height: 1.6;
     }
     .deliverable-list li::before {
       content: '';
       display: block;
-      width: 6px; height: 6px;
-      background: var(--sage);
+      width: 4px; height: 4px;
+      background: var(--green-primary);
       border-radius: 50%;
-      margin-top: 0.55rem;
+      margin-top: 0.6rem;
       flex-shrink: 0;
+    }
+    .deliverable-list .li-emphasis {
+      color: rgba(252,252,252,0.5);
+      font-style: italic;
+      font-size: 0.85rem;
     }
 
     /* ─── SECTION COMMON ─── */
     section { padding: 5rem 2rem; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-label {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--sage);
+      color: var(--green-primary);
       margin-bottom: 0.6rem;
     }
     .section-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 2.2rem; color: var(--forest);
+      font-family: 'Cormorant', serif;
+      font-size: 2rem; font-weight: 500;
+      color: var(--dark);
       margin-bottom: 1rem;
     }
     .section-intro {
-      font-size: 1.05rem; color: var(--mid);
+      font-size: 1rem; color: var(--grey-mid);
       max-width: 680px; margin-bottom: 3rem;
-    }
-
-    /* ─── ABOUT CCAI ─── */
-    #about {
-      background: var(--warm-white);
-      position: relative;
-    }
-    .about-content {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
-      align-items: start;
-    }
-    .about-text p { margin-bottom: 1rem; color: var(--charcoal); font-size: 0.98rem; }
-    .about-aside {
-      background: rgba(255,255,255,0.8);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--sage-light);
-      border-radius: 2px 12px 12px 2px;
-      padding: 2rem;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-    }
-    .about-aside h4 {
-      font-size: 0.85rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--forest); margin-bottom: 1rem;
-    }
-    .framework-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .tag {
-      padding: 0.35rem 0.8rem;
-      background: var(--sage-wash);
-      color: var(--forest);
-      border-radius: 20px;
-      font-size: 0.82rem;
-      font-weight: 500;
     }
 
     /* ─── DASHBOARD ─── */
     #dashboard {
-      background: var(--sand);
-      position: relative;
+      background: var(--creme);
     }
     .stat-grid {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
       margin-bottom: 3rem;
     }
     .stat-card {
-      background: rgba(255,255,255,0.75);
+      background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 12px;
       padding: 1.5rem;
-      position: relative;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
     }
     .stat-card::before {
       content: '';
-      position: absolute; top: 0; left: 1.5rem; right: 1.5rem;
-      height: 3px; border-radius: 0 0 3px 3px;
+      display: block;
+      width: 24px; height: 3px;
+      background: var(--green-primary);
+      margin-bottom: 1rem;
     }
-    .stat-card:nth-child(1)::before { background: var(--sage); }
-    .stat-card:nth-child(2)::before { background: var(--terracotta); }
-    .stat-card:nth-child(3)::before { background: var(--forest); }
-    .stat-card:nth-child(4)::before { background: var(--teal); }
+    .stat-card:nth-child(2)::before { background: var(--blue-primary); }
+    .stat-card:nth-child(3)::before { background: var(--yellow); }
+    .stat-card:nth-child(4)::before { background: var(--green-secondary); }
 
     .stat-number {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 2rem; font-weight: 700;
-      color: var(--forest);
+      font-family: 'Karla', sans-serif;
+      font-size: 2rem; font-weight: 600;
+      color: var(--dark);
       line-height: 1;
       margin-bottom: 0.4rem;
     }
     .stat-unit {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.15em;
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--mid);
+      color: var(--grey-mid);
     }
 
     /* Dashboard sub-sections */
     .dashboard-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
-      margin-bottom: 2rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+      margin-bottom: 1.5rem;
     }
     .dashboard-card {
-      background: rgba(255,255,255,0.75);
+      background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 12px;
       padding: 2rem;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
     }
     .dashboard-card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem; color: var(--forest);
+      font-family: 'Cormorant', serif;
+      font-size: 1.1rem; font-weight: 500;
+      color: var(--dark);
       margin-bottom: 1.5rem;
     }
     .chart-container {
@@ -304,49 +262,42 @@
       margin-bottom: 1rem;
     }
     .bar-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem; font-weight: 600;
-      color: var(--charcoal);
+      font-size: 0.75rem; font-weight: 500;
+      color: var(--dark);
       min-width: 70px;
-      letter-spacing: 0.05em;
     }
     .bar-track {
       flex: 1;
-      height: 20px;
-      background: var(--stone);
-      border-radius: 4px;
+      height: 16px;
+      background: var(--creme);
       overflow: hidden;
     }
     .bar-fill {
       height: 100%;
-      border-radius: 4px;
       width: 0;
       transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
     .bar-fill.animated { width: var(--target-width); }
-    .bar-fill.sage { background: var(--sage); }
-    .bar-fill.terracotta { background: var(--terracotta); }
-    .bar-fill.teal { background: var(--teal); }
+    .bar-fill.green { background: var(--green-primary); }
+    .bar-fill.blue { background: var(--blue-primary); }
+    .bar-fill.teal { background: var(--green-secondary); }
     .bar-value {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem; font-weight: 600;
-      color: var(--mid);
+      font-size: 0.75rem; font-weight: 500;
+      color: var(--grey-mid);
       min-width: 50px;
       text-align: right;
     }
 
     /* SVG Map */
     .map-card {
-      background: rgba(255,255,255,0.75);
+      background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 12px;
       padding: 2rem;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
     }
     .map-card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem; color: var(--forest);
+      font-family: 'Cormorant', serif;
+      font-size: 1.1rem; font-weight: 500;
+      color: var(--dark);
       margin-bottom: 1.5rem;
     }
     .map-container {
@@ -365,21 +316,19 @@
       text-align: center;
     }
     .map-stat-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.4rem; font-weight: 700;
-      color: var(--forest);
+      font-size: 1.4rem; font-weight: 600;
+      color: var(--dark);
     }
     .map-stat-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.12em;
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--mid);
+      color: var(--grey-mid);
     }
 
     .dashboard-source {
-      font-size: 0.78rem;
-      color: var(--light-mid);
+      font-size: 0.75rem;
+      color: var(--grey-light);
       text-align: center;
       margin-top: 2rem;
       font-style: italic;
@@ -387,91 +336,106 @@
 
     /* ─── OPERATIONAL ANALYSIS ─── */
     #analysis {
-      background: var(--warm-white);
+      background: var(--white);
     }
-    .how-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+    .ops-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
     }
-    .how-card {
-      background: rgba(255,255,255,0.8);
+    .ops-card {
+      background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 12px;
       padding: 2rem;
-      position: relative;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
     }
-    .how-card::before {
+    .ops-card::before {
       content: '';
-      position: absolute; top: 0; left: 2rem; right: 2rem;
-      height: 3px; border-radius: 0 0 3px 3px;
+      display: block;
+      width: 24px; height: 3px;
+      background: var(--green-primary);
+      margin-bottom: 1.2rem;
     }
-    .how-card:nth-child(1)::before { background: var(--sage); }
-    .how-card:nth-child(2)::before { background: var(--clay); }
-    .how-card:nth-child(3)::before { background: var(--terracotta); }
-    .how-card .card-stat {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.12em;
+    .ops-card:nth-child(2)::before { background: var(--blue-primary); }
+    .ops-card:nth-child(3)::before { background: var(--yellow); }
+    .ops-card .card-stat {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--sage);
+      color: var(--green-primary);
       margin-bottom: 0.8rem;
     }
-    .how-card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.15rem; color: var(--forest);
+    .ops-card:nth-child(2) .card-stat { color: var(--blue-primary); }
+    .ops-card:nth-child(3) .card-stat { color: var(--yellow); }
+    .ops-card h3 {
+      font-family: 'Cormorant', serif;
+      font-size: 1.15rem; font-weight: 500;
+      color: var(--dark);
       margin-bottom: 0.8rem;
     }
-    .how-card p { font-size: 0.92rem; color: var(--mid); }
+    .ops-card p { font-size: 0.9rem; color: var(--grey-mid); line-height: 1.7; }
 
     /* ─── EXPERIENCE ─── */
     #experience {
-      background: var(--sand);
+      background: var(--creme);
     }
     .experience-content {
       display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
       align-items: start;
     }
-    .experience-text p { margin-bottom: 1rem; color: var(--charcoal); font-size: 0.98rem; }
-    .experience-text strong { color: var(--forest); }
+    .experience-text p { margin-bottom: 1rem; color: var(--grey-dark); font-size: 0.95rem; }
+    .experience-text strong { color: var(--dark); }
+    .experience-aside {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--green-primary);
+      padding: 2rem;
+    }
+    .experience-aside h4 {
+      font-size: 0.78rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--dark); margin-bottom: 0.8rem;
+    }
+    .framework-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+    .tag {
+      padding: 0.3rem 0.7rem;
+      background: var(--creme);
+      color: var(--grey-dark);
+      font-size: 0.78rem;
+      font-weight: 400;
+    }
 
     /* ─── 90 DAYS ─── */
     #ninety-days {
-      background: var(--warm-white);
+      background: var(--white);
     }
     .timeline-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
     }
     .timeline-card {
-      background: rgba(255,255,255,0.8);
+      background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 12px;
       padding: 2rem;
-      position: relative;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
     }
     .timeline-card::before {
       content: '';
-      position: absolute; top: 0; left: 2rem; right: 2rem;
-      height: 3px; border-radius: 0 0 3px 3px;
+      display: block;
+      width: 24px; height: 3px;
+      background: var(--green-primary);
+      margin-bottom: 1.2rem;
     }
-    .timeline-card:nth-child(1)::before { background: var(--sage); }
-    .timeline-card:nth-child(2)::before { background: var(--clay); }
-    .timeline-card:nth-child(3)::before { background: var(--terracotta); }
+    .timeline-card:nth-child(2)::before { background: var(--blue-primary); }
+    .timeline-card:nth-child(3)::before { background: var(--yellow); }
     .phase-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.15em;
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--sage);
+      color: var(--green-primary);
       margin-bottom: 0.6rem;
     }
-    .timeline-card:nth-child(2) .phase-label { color: var(--clay); }
-    .timeline-card:nth-child(3) .phase-label { color: var(--terracotta); }
+    .timeline-card:nth-child(2) .phase-label { color: var(--blue-primary); }
+    .timeline-card:nth-child(3) .phase-label { color: var(--yellow); }
     .timeline-card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.15rem; color: var(--forest);
+      font-family: 'Cormorant', serif;
+      font-size: 1.15rem; font-weight: 500;
+      color: var(--dark);
       margin-bottom: 1rem;
     }
     .timeline-card ul {
@@ -479,81 +443,78 @@
     }
     .timeline-card li {
       padding: 0.4rem 0;
-      font-size: 0.9rem;
-      color: var(--mid);
+      font-size: 0.88rem;
+      color: var(--grey-mid);
       display: flex; align-items: flex-start; gap: 0.6rem;
     }
     .timeline-card li::before {
       content: '';
       display: block;
-      width: 5px; height: 5px;
-      background: var(--sage-light);
+      width: 4px; height: 4px;
+      background: var(--grey-light);
       border-radius: 50%;
       margin-top: 0.55rem;
       flex-shrink: 0;
     }
     .caveat {
       margin-top: 2rem;
-      font-size: 0.88rem;
-      color: var(--light-mid);
+      font-size: 0.85rem;
+      color: var(--grey-light);
       font-style: italic;
       max-width: 680px;
     }
 
     /* ─── CONTACT ─── */
     .contact-bg {
-      background: var(--forest);
-      color: white;
-      position: relative;
+      background: var(--teal-dark);
+      color: var(--white);
     }
     .contact-inner {
       max-width: 700px;
       margin: 0 auto;
       text-align: center;
-      position: relative; z-index: 1;
     }
-    .contact-inner .section-label { color: var(--sage-light); }
-    .contact-inner .section-title { color: white; }
-    .contact-inner p { color: rgba(255,255,255,0.7); margin-bottom: 2rem; font-size: 1.05rem; }
+    .contact-inner .section-label { color: var(--green-secondary); }
+    .contact-inner .section-title { color: var(--white); }
+    .contact-inner p { color: rgba(252,252,252,0.7); margin-bottom: 2rem; font-size: 1rem; }
     .contact-buttons {
       display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
     }
     .contact-btn {
       display: inline-block;
-      padding: 0.8rem 2.5rem;
-      border: 2px solid var(--sage-light);
-      color: var(--sage-light);
+      padding: 0.7rem 2rem;
+      border: 1px solid rgba(252,252,252,0.3);
+      color: var(--white);
       text-decoration: none;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: background 0.2s, color 0.2s;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 0.88rem;
+      transition: background 0.3s, border-color 0.3s;
     }
-    .contact-btn:hover { background: var(--sage-light); color: var(--forest); }
+    .contact-btn:hover { background: rgba(252,252,252,0.1); border-color: rgba(252,252,252,0.5); }
     .contact-details {
       margin-top: 2rem;
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.45);
+      font-size: 0.85rem;
+      color: rgba(252,252,252,0.4);
     }
 
     /* ─── FOOTER ─── */
     footer {
       text-align: center;
       padding: 2rem;
-      font-size: 0.8rem;
-      color: var(--light-mid);
-      background: var(--warm-white);
+      font-size: 0.75rem;
+      color: var(--grey-light);
+      background: var(--white);
     }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .hero-text h1 { font-size: 2.4rem; }
-      .about-content { grid-template-columns: 1fr; }
+      .hero-text h1 { font-size: 2.2rem; }
       .experience-content { grid-template-columns: 1fr; }
       .stat-grid { grid-template-columns: repeat(2, 1fr); }
       .dashboard-grid { grid-template-columns: 1fr; }
-      .how-grid { grid-template-columns: 1fr; }
+      .ops-grid { grid-template-columns: 1fr; }
       .timeline-grid { grid-template-columns: 1fr; }
       .nav-links { gap: 1.2rem; }
     }
@@ -561,7 +522,7 @@
     @media (max-width: 600px) {
       .hero { min-height: auto; padding: 6rem 1.2rem 3rem; }
       .hero-text h1 { font-size: 1.8rem; }
-      .hero-text p { font-size: 1rem; }
+      .hero-text p { font-size: 0.95rem; }
       section { padding: 3rem 1.2rem; }
       .section-title { font-size: 1.6rem; }
       .hero-card { padding: 1.5rem; }
@@ -573,15 +534,13 @@
       .nav-links {
         display: none;
         position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(250, 247, 242, 0.98);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        background: rgba(37,37,37,0.98);
         flex-direction: column;
         align-items: center; justify-content: center;
         gap: 2rem;
       }
       .nav-links.open { display: flex; }
-      .nav-links a { font-size: 1.2rem; }
+      .nav-links a { font-size: 1.2rem; color: var(--white); }
     }
 
     /* ─── ANIMATION ─── */
@@ -602,7 +561,6 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#about">About CCAI</a></li>
         <li><a href="#dashboard">Impact data</a></li>
         <li><a href="#analysis">Operational analysis</a></li>
         <li><a href="#experience">Experience</a></li>
@@ -616,67 +574,18 @@
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-text fade-up">
-        <h1>What running CCAI's <span>operations</span> could look like.</h1>
-        <p>This is how I'd approach the first year as CCAI's Director of Operations &amp; Projects — based on your public work, your team structure, and the gaps that matter most at your stage of growth.</p>
+        <h1>Catalyzing CCAI's strategic ambitions</h1>
+        <p>I know I am more of a wildcard candidate with more corporate sustainability programme management and operations experience. I want to show you what I'd bring to this role and express my enthusiasm for the work CCAI does.</p>
         <a href="#contact" class="hero-cta">Let's talk</a>
       </div>
       <div class="hero-card fade-up" style="transition-delay: 0.15s;">
         <h3>What this site is</h3>
         <ul class="deliverable-list">
-          <li>A bespoke application brief for the Director of Operations &amp; Projects role at Climate Change AI</li>
-          <li>A live dashboard built from CCAI's public data — demonstrating the kind of impact reporting the role requires</li>
-          <li>An operational diagnosis identifying where investment would compound CCAI's impact most</li>
-          <li>A first 90 days sketch showing how I'd approach the role from day one</li>
+          <li>A bespoke application for the Director of Operations &amp; Projects role at Climate Change AI. <span class="li-emphasis">A demonstration of commitment and enthusiasm</span></li>
+          <li>A live dashboard built from CCAI's public data. <span class="li-emphasis">A demonstration of the kind of impact reporting the role requires</span></li>
+          <li>An operational diagnosis. <span class="li-emphasis">Some informed thought-starters of where to focus first</span></li>
+          <li>A first 90 days sketch showing how I'd approach the role</li>
         </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT CCAI -->
-  <section id="about">
-    <div class="section-inner">
-      <div class="section-label fade-up">About CCAI</div>
-      <h2 class="section-title fade-up">A research organisation at an inflection point</h2>
-      <div class="about-content">
-        <div class="about-text fade-up">
-          <p>Climate Change AI is a global nonprofit that catalyses impactful work at the intersection of climate change and machine learning. Founded in June 2019 by David Rolnick, Lynn Kaack, and Priya Donti, CCAI launched with a landmark 60-page paper — <em>Tackling Climate Change with Machine Learning</em> — that mapped the full landscape of ML applications for climate action and set the agenda for the field.</p>
-          <p>Since incorporating as a 501(c)(3) in 2021, CCAI has grown into a genuinely global operation. The organisation runs workshops at every major ML conference (six consecutive years at NeurIPS, four at ICLR), a summer school programme that grew from 73 selected participants in 2022 to over 10,000 virtual registrants across 160+ countries in 2023, and an Innovation Grants programme that has funded 23 projects across 62 institutions in 22 countries.</p>
-          <p>What makes CCAI operationally distinctive — and challenging — is its model. A small core of paid staff coordinates a distributed volunteer network of 50+ researchers and practitioners across five continents. This is a high-impact, low-overhead structure, but it depends entirely on the quality of its operational infrastructure: coordination systems, onboarding processes, reporting pipelines, and the back-end that holds it all together.</p>
-          <p>CCAI is at the stage where its ambition has outpaced its operational capacity. The programmes are working. The community is growing. What it needs now is someone who can build the systems that let it scale without losing coherence.</p>
-        </div>
-        <div class="about-aside fade-up" style="transition-delay: 0.1s;">
-          <h4>Research domains</h4>
-          <div class="framework-tags">
-            <span class="tag">Agriculture &amp; Food</span>
-            <span class="tag">Power &amp; Energy</span>
-            <span class="tag">Buildings &amp; Cities</span>
-            <span class="tag">Transportation</span>
-            <span class="tag">Ecosystems &amp; Biodiversity</span>
-            <span class="tag">Disaster Management</span>
-            <span class="tag">Climate Science</span>
-          </div>
-          <h4>Core programmes</h4>
-          <div class="framework-tags">
-            <span class="tag">NeurIPS Workshops</span>
-            <span class="tag">ICLR Workshops</span>
-            <span class="tag">Summer Schools</span>
-            <span class="tag">Innovation Grants</span>
-            <span class="tag">Policy Reports</span>
-          </div>
-          <h4>Co-founders</h4>
-          <div class="framework-tags">
-            <span class="tag">David Rolnick</span>
-            <span class="tag">Lynn Kaack</span>
-            <span class="tag">Priya Donti</span>
-          </div>
-          <h4>Key funders</h4>
-          <div class="framework-tags" style="margin-bottom: 0;">
-            <span class="tag">Quadrature Climate Foundation</span>
-            <span class="tag">Schmidt Futures</span>
-            <span class="tag">Google DeepMind</span>
-            <span class="tag">Global Methane Hub</span>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -725,14 +634,14 @@
             <div class="bar-row">
               <span class="bar-label">NeurIPS</span>
               <div class="bar-track">
-                <div class="bar-fill sage" style="--target-width: 100%;"></div>
+                <div class="bar-fill green" style="--target-width: 100%;"></div>
               </div>
               <span class="bar-value">6 yrs</span>
             </div>
             <div class="bar-row">
               <span class="bar-label">ICLR</span>
               <div class="bar-track">
-                <div class="bar-fill terracotta" style="--target-width: 67%;"></div>
+                <div class="bar-fill blue" style="--target-width: 67%;"></div>
               </div>
               <span class="bar-value">4 yrs</span>
             </div>
@@ -749,21 +658,21 @@
             <div class="bar-row">
               <span class="bar-label">Projects</span>
               <div class="bar-track">
-                <div class="bar-fill sage" style="--target-width: 37%;"></div>
+                <div class="bar-fill green" style="--target-width: 37%;"></div>
               </div>
               <span class="bar-value">23</span>
             </div>
             <div class="bar-row">
               <span class="bar-label">Institutions</span>
               <div class="bar-track">
-                <div class="bar-fill sage" style="--target-width: 100%;"></div>
+                <div class="bar-fill green" style="--target-width: 100%;"></div>
               </div>
               <span class="bar-value">62</span>
             </div>
             <div class="bar-row">
               <span class="bar-label">Countries</span>
               <div class="bar-track">
-                <div class="bar-fill sage" style="--target-width: 35%;"></div>
+                <div class="bar-fill green" style="--target-width: 35%;"></div>
               </div>
               <span class="bar-value">22</span>
             </div>
@@ -776,31 +685,30 @@
         <h3>Global reach</h3>
         <div class="map-container">
           <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simplified world map showing CCAI's global presence across five continents">
-            <!-- Simplified continent outlines -->
             <!-- North America -->
-            <path d="M 120 80 L 180 60 L 260 70 L 280 100 L 300 130 L 280 160 L 260 200 L 240 220 L 200 240 L 170 230 L 140 200 L 120 160 L 100 120 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <path d="M 120 80 L 180 60 L 260 70 L 280 100 L 300 130 L 280 160 L 260 200 L 240 220 L 200 240 L 170 230 L 140 200 L 120 160 L 100 120 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
             <!-- Central America -->
-            <path d="M 200 240 L 220 260 L 230 290 L 210 300 L 190 280 L 180 260 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <path d="M 200 240 L 220 260 L 230 290 L 210 300 L 190 280 L 180 260 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
             <!-- South America -->
-            <path d="M 230 290 L 260 300 L 290 330 L 300 370 L 290 410 L 270 440 L 250 450 L 230 430 L 220 390 L 210 350 L 220 320 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <path d="M 230 290 L 260 300 L 290 330 L 300 370 L 290 410 L 270 440 L 250 450 L 230 430 L 220 390 L 210 350 L 220 320 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
             <!-- Europe -->
-            <path d="M 440 70 L 480 60 L 520 65 L 540 80 L 530 110 L 510 130 L 490 140 L 470 130 L 450 120 L 430 100 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <path d="M 440 70 L 480 60 L 520 65 L 540 80 L 530 110 L 510 130 L 490 140 L 470 130 L 450 120 L 430 100 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
             <!-- Africa -->
-            <path d="M 460 160 L 500 150 L 540 160 L 560 200 L 570 250 L 560 300 L 540 340 L 520 370 L 500 380 L 480 370 L 460 340 L 450 300 L 440 250 L 440 200 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <path d="M 460 160 L 500 150 L 540 160 L 560 200 L 570 250 L 560 300 L 540 340 L 520 370 L 500 380 L 480 370 L 460 340 L 450 300 L 440 250 L 440 200 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
             <!-- Asia -->
-            <path d="M 540 60 L 600 50 L 680 55 L 760 70 L 820 90 L 840 120 L 830 150 L 800 170 L 760 180 L 720 170 L 680 160 L 640 150 L 600 140 L 570 130 L 550 110 L 540 80 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <path d="M 540 60 L 600 50 L 680 55 L 760 70 L 820 90 L 840 120 L 830 150 L 800 170 L 760 180 L 720 170 L 680 160 L 640 150 L 600 140 L 570 130 L 550 110 L 540 80 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
             <!-- South/Southeast Asia -->
-            <path d="M 640 160 L 680 170 L 720 180 L 740 200 L 760 230 L 740 250 L 710 240 L 680 220 L 650 200 L 640 180 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <path d="M 640 160 L 680 170 L 720 180 L 740 200 L 760 230 L 740 250 L 710 240 L 680 220 L 650 200 L 640 180 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
             <!-- Oceania -->
-            <path d="M 780 300 L 830 290 L 870 310 L 880 340 L 870 370 L 840 380 L 810 370 L 790 350 L 780 330 Z" fill="var(--sage-light)" stroke="var(--sage)" stroke-width="0.8"/>
+            <path d="M 780 300 L 830 290 L 870 310 L 880 340 L 870 370 L 840 380 L 810 370 L 790 350 L 780 330 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
             <!-- Key hubs -->
-            <circle cx="230" cy="130" r="5" fill="var(--forest)" opacity="0.7"/>
-            <text x="230" y="120" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--forest)" font-weight="600">MONTREAL</text>
-            <circle cx="490" cy="100" r="4" fill="var(--terracotta)" opacity="0.7"/>
-            <circle cx="680" cy="120" r="4" fill="var(--terracotta)" opacity="0.7"/>
-            <circle cx="830" cy="340" r="4" fill="var(--terracotta)" opacity="0.7"/>
-            <circle cx="500" cy="300" r="4" fill="var(--terracotta)" opacity="0.7"/>
-            <circle cx="260" cy="350" r="4" fill="var(--terracotta)" opacity="0.7"/>
+            <circle cx="230" cy="130" r="5" fill="var(--green-primary)" opacity="0.7"/>
+            <text x="230" y="120" text-anchor="middle" font-family="Karla, sans-serif" font-size="8" fill="var(--dark)" font-weight="500">MONTREAL</text>
+            <circle cx="490" cy="100" r="4" fill="var(--blue-primary)" opacity="0.7"/>
+            <circle cx="680" cy="120" r="4" fill="var(--blue-primary)" opacity="0.7"/>
+            <circle cx="830" cy="340" r="4" fill="var(--blue-primary)" opacity="0.7"/>
+            <circle cx="500" cy="300" r="4" fill="var(--blue-primary)" opacity="0.7"/>
+            <circle cx="260" cy="350" r="4" fill="var(--blue-primary)" opacity="0.7"/>
           </svg>
         </div>
         <div class="map-stats">
@@ -835,23 +743,23 @@
   <section id="analysis">
     <div class="section-inner">
       <div class="section-label fade-up">Operational analysis</div>
-      <h2 class="section-title fade-up">Three opportunities for CCAI's next phase</h2>
-      <p class="section-intro fade-up">Based on CCAI's public work, team structure, and the JD for this role, these are the three areas where operational investment would compound impact most.</p>
-      <div class="how-grid">
-        <div class="how-card fade-up">
+      <h2 class="section-title fade-up">Three areas of initial focus</h2>
+      <p class="section-intro fade-up">Based on CCAI's public work, team structure, and the JD for this role.</p>
+      <div class="ops-grid">
+        <div class="ops-card fade-up">
           <div class="card-stat">50+ volunteers · 5 continents</div>
           <h3>Volunteer coordination infrastructure</h3>
-          <p>CCAI runs on a distributed, largely volunteer-driven model. At this scale, ad-hoc coordination creates drag. Core team members commit 5–10 hours per week across different time zones with varying levels of engagement. A well-designed CRM and onboarding system — with clear role definitions, structured pathways from application to active contribution, and lightweight retention tracking — would reduce coordinator burden and compound impact across every programme. The JD explicitly asks for CRM design and volunteer recruitment. This is foundational.</p>
+          <p>A well-designed volunteer CRM, onboarding and task / contribution tracking system would reduce contributor burden as well as allow smoother tracking of activities for CCAI staff.</p>
         </div>
-        <div class="how-card fade-up" style="transition-delay: 0.1s;">
+        <div class="ops-card fade-up" style="transition-delay: 0.1s;">
           <div class="card-stat">4 programme streams · 23 projects</div>
           <h3>Programmatic impact tracking</h3>
-          <p>CCAI runs grants, events, summer schools, and policy work simultaneously — each with different impact metrics, reporting timelines, and stakeholder audiences. The ability to evaluate impact across these streams consistently, comparably, and in a way that feeds back into strategy is under-resourced at most organisations at this stage. A unified reporting framework would serve three purposes: funder reporting, board-level strategic insight, and public-facing transparency. The dashboard on this page is a proof of concept for that kind of system.</p>
+          <p>Tracking the different impact metrics from grants, events, summer school and policy work and mapping those to the strategic direction of the organization is essential to improve decision-making around resource allocation. CCAI needs to be doing more of the most effective work so a reporting framework and dashboard of this kind would support that. It also connects to funder reporting, board-level strategic insight, and public-facing transparency.</p>
         </div>
-        <div class="how-card fade-up" style="transition-delay: 0.2s;">
+        <div class="ops-card fade-up" style="transition-delay: 0.2s;">
           <div class="card-stat">501(c)(3) since 2021</div>
           <h3>Back-end infrastructure for scale</h3>
-          <p>Legal, financial, and logistical infrastructure built for a small startup doesn't scale cleanly. As CCAI's programmes grow — especially the Innovation Grants programme managing $1.4M annually across 22 countries — getting the back-end right becomes foundational. This means financial controls, procurement processes, contract templates for international grantees, and documentation that lets institutional knowledge survive staff transitions. None of this is glamorous. All of it is load-bearing.</p>
+          <p>Reviewing the legal and financial structure and processes. Ensuring the foundational elements of operations are set up in a way that isn't creating friction for staff or core team. Bringing fresh eyes onto a legacy set-up can be helpful but this is as much a listening and learning focus area as an action one.</p>
         </div>
       </div>
     </div>
@@ -870,7 +778,7 @@
           <p><strong>AI and climate domain knowledge.</strong> My current academic research — developing a quality assessment framework for AI-assisted Scope 3 emissions estimation — sits squarely at CCAI's intersection of AI and climate action. I understand the technical landscape, the methodological challenges, and the gap between what AI tools promise and what they deliver. This isn't adjacent knowledge — it's direct mission relevance.</p>
           <p><strong>Independent, remote, self-directed.</strong> I've worked independently across UK, European, and South African contexts for years. I'm used to operating autonomously in distributed teams, flagging issues early, and building my own structure. CCAI's remote-first, globally distributed model is how I already work.</p>
         </div>
-        <div class="about-aside fade-up" style="transition-delay: 0.1s;">
+        <div class="experience-aside fade-up" style="transition-delay: 0.1s;">
           <h4>Programme delivery</h4>
           <div class="framework-tags">
             <span class="tag">Multi-stakeholder coordination</span>
@@ -970,21 +878,6 @@
   </footer>
 
   <script>
-    // ─── DATA ───
-    const CCAI_DATA = {
-      summerSchool: [
-        { year: '2022', participants: 73, label: '73 selected participants' },
-        { year: '2023', participants: 10000, label: '10,000+ virtual registrants' },
-        { year: '2024', participants: 34, label: '34 in-person + 1000s virtual', barLabel: '150+ countries' }
-      ],
-      workshops: {
-        neurips: 6, iclr: 4, icml: 2
-      },
-      grants: {
-        projects: 23, institutions: 62, countries: 22, annualFunding: 1.4
-      }
-    };
-
     // ─── NAV SCROLL ───
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
@@ -1041,7 +934,6 @@
       });
     }
 
-    // Trigger stat animation when dashboard enters view
     const statGrid = document.querySelector('.stat-grid');
     const statObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1083,7 +975,7 @@
     chartObserver.observe(chartCanvas.closest('.dashboard-card'));
 
     function initSummerSchoolChart() {
-      Chart.defaults.font.family = "'DM Sans', sans-serif";
+      Chart.defaults.font.family = "'Karla', sans-serif";
 
       new Chart(chartCanvas, {
         type: 'bar',
@@ -1092,8 +984,8 @@
           datasets: [{
             label: 'Summer school reach',
             data: [73, 10000, 5000],
-            backgroundColor: ['#7A9E7E', '#7A9E7E', '#7A9E7E'],
-            borderRadius: 4,
+            backgroundColor: ['#448A79', '#448A79', '#448A79'],
+            borderRadius: 0,
             barThickness: 40
           }]
         },
@@ -1117,11 +1009,11 @@
                   return labels[ctx.dataIndex];
                 }
               },
-              backgroundColor: '#3B5249',
-              titleFont: { family: "'JetBrains Mono', monospace", size: 11 },
-              bodyFont: { family: "'DM Sans', sans-serif", size: 12 },
+              backgroundColor: '#252525',
+              titleFont: { family: "'Karla', sans-serif", size: 11 },
+              bodyFont: { family: "'Karla', sans-serif", size: 12 },
               padding: 12,
-              cornerRadius: 6
+              cornerRadius: 2
             }
           },
           scales: {
@@ -1129,8 +1021,8 @@
               beginAtZero: true,
               grid: { color: 'rgba(0,0,0,0.04)', drawBorder: false },
               ticks: {
-                font: { family: "'JetBrains Mono', monospace", size: 10 },
-                color: '#A8A49E',
+                font: { family: "'Karla', sans-serif", size: 10 },
+                color: '#aaaaaa',
                 callback: function(val) {
                   if (val >= 1000) return (val / 1000) + 'k';
                   return val;
@@ -1140,8 +1032,8 @@
             x: {
               grid: { display: false },
               ticks: {
-                font: { family: "'JetBrains Mono', monospace", size: 11, weight: 600 },
-                color: '#7A7873'
+                font: { family: "'Karla', sans-serif", size: 11, weight: 500 },
+                color: '#757575'
               }
             }
           }
