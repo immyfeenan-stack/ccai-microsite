@@ -334,6 +334,211 @@
       font-style: italic;
     }
 
+    /* Alignment matrix */
+    .alignment-matrix { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+    .alignment-matrix th {
+      font-family: 'Karla', sans-serif;
+      font-size: 0.75rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--grey-mid);
+      padding: 0.6rem 0.8rem;
+      text-align: center;
+    }
+    .alignment-matrix th:first-child { text-align: left; min-width: 160px; }
+    .alignment-matrix td {
+      padding: 0.5rem 0.8rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .alignment-matrix td:first-child {
+      font-family: 'Karla', sans-serif;
+      font-size: 0.85rem; font-weight: 500;
+      color: var(--dark);
+      text-align: left;
+    }
+    .alignment-cell {
+      display: inline-block;
+      width: 36px; height: 18px;
+    }
+    .alignment-cell.strong { background: var(--green-primary); }
+    .alignment-cell.moderate { background: var(--green-primary); opacity: 0.5; }
+    .alignment-cell.minimal { background: var(--green-primary); opacity: 0.15; }
+    .matrix-legend {
+      display: flex; gap: 1.5rem; margin-bottom: 1rem;
+      font-size: 0.75rem; color: var(--grey-mid);
+      align-items: center;
+    }
+    .matrix-legend span {
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .legend-swatch {
+      display: inline-block; width: 18px; height: 10px;
+    }
+    .matrix-insight {
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--grey-mid);
+      line-height: 1.6;
+    }
+
+    /* Programme health cards */
+    .programme-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 2rem;
+    }
+    .programme-card::before {
+      content: '';
+      display: block;
+      width: 24px; height: 3px;
+      background: var(--green-primary);
+      margin-bottom: 1rem;
+    }
+    .programme-card:nth-child(2)::before { background: var(--blue-primary); }
+    .programme-card:nth-child(3)::before { background: var(--yellow); }
+    .programme-card:nth-child(4)::before { background: var(--green-secondary); }
+    .programme-card h3 {
+      font-family: 'Cormorant', serif;
+      font-size: 1.1rem; font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 1.2rem;
+    }
+    .programme-stats {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .programme-stat-num {
+      font-family: 'Karla', sans-serif;
+      font-size: 1.4rem; font-weight: 600;
+      color: var(--dark);
+      line-height: 1;
+    }
+    .programme-stat-label {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grey-mid);
+      margin-top: 0.2rem;
+    }
+    .status-indicator {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+    .status-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .status-dot.green { background: var(--green-primary); }
+    .status-dot.yellow { background: var(--yellow); }
+    .status-dot.red { background: #c0392b; }
+    .status-label {
+      font-size: 0.78rem; font-weight: 500;
+      color: var(--dark);
+    }
+    .programme-note {
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--grey-mid);
+      line-height: 1.5;
+    }
+
+    /* Paired bars */
+    .paired-bar-group { margin-bottom: 1.2rem; }
+    .paired-bar-label {
+      font-size: 0.8rem; font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+    }
+    .paired-bar-row {
+      display: flex; align-items: center; gap: 0.6rem;
+      margin-bottom: 0.3rem;
+    }
+    .paired-bar-tag {
+      font-size: 0.68rem; font-weight: 500;
+      color: var(--grey-mid);
+      min-width: 90px;
+    }
+    .paired-bar-track {
+      flex: 1; height: 14px;
+      background: var(--creme);
+      overflow: hidden;
+    }
+    .paired-bar-fill {
+      height: 100%;
+      width: 0;
+      transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .paired-bar-fill.animated { width: var(--target-width); }
+    .paired-bar-val {
+      font-size: 0.75rem; font-weight: 500;
+      color: var(--grey-mid);
+      min-width: 35px;
+      text-align: right;
+    }
+    .paired-legend {
+      display: flex; gap: 1.5rem; margin-bottom: 1.5rem;
+      font-size: 0.72rem; color: var(--grey-mid);
+    }
+    .paired-legend span {
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .paired-legend-swatch {
+      display: inline-block; width: 14px; height: 10px;
+    }
+
+    /* Volunteer stats */
+    .volunteer-stats {
+      display: flex; gap: 1.5rem; margin-top: 1.2rem;
+    }
+    .volunteer-stat { text-align: center; }
+    .volunteer-stat-num {
+      font-family: 'Karla', sans-serif;
+      font-size: 1.4rem; font-weight: 600;
+      color: var(--dark); line-height: 1;
+    }
+    .volunteer-stat-label {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grey-mid);
+      margin-top: 0.2rem;
+    }
+
+    /* Decision items */
+    .decision-list { list-style: none; }
+    .decision-item {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0 1rem 1rem;
+      border-left: 3px solid var(--green-primary);
+      margin-bottom: 1rem;
+    }
+    .decision-item:nth-child(2) { border-left-color: var(--blue-primary); }
+    .decision-item:nth-child(3) { border-left-color: var(--yellow); }
+    .decision-item:nth-child(4) { border-left-color: var(--green-secondary); }
+    .decision-title {
+      font-family: 'Karla', sans-serif;
+      font-size: 0.9rem; font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.3rem;
+    }
+    .decision-context {
+      font-size: 0.85rem;
+      color: var(--grey-mid);
+      line-height: 1.5;
+    }
+    .decision-tag {
+      flex-shrink: 0;
+      padding: 0.3rem 0.7rem;
+      background: var(--creme);
+      color: var(--grey-dark);
+      font-size: 0.72rem;
+      font-weight: 500;
+      align-self: flex-start;
+      margin-top: 0.2rem;
+    }
+
     /* ─── OPERATIONAL ANALYSIS ─── */
     #analysis {
       background: var(--white);
@@ -561,7 +766,7 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#dashboard">Impact data</a></li>
+        <li><a href="#dashboard">Operations dashboard</a></li>
         <li><a href="#analysis">Operational analysis</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#ninety-days">90-day plan</a></li>
@@ -575,14 +780,14 @@
     <div class="hero-inner">
       <div class="hero-text fade-up">
         <h1>Catalyzing CCAI's strategic ambitions</h1>
-        <p>I know I am more of a wildcard candidate with more corporate sustainability programme management and operations experience. I want to show you what I'd bring to this role and express my enthusiasm for the work CCAI does.</p>
+        <p>I come from a sustainability programme management and operations background — different from your typical candidate. This site is designed to show you what that perspective brings to CCAI's next stage of growth.</p>
         <a href="#contact" class="hero-cta">Let's talk</a>
       </div>
       <div class="hero-card fade-up" style="transition-delay: 0.15s;">
         <h3>What this site is</h3>
         <ul class="deliverable-list">
-          <li>A bespoke application for the Director of Operations &amp; Projects role at Climate Change AI. <span class="li-emphasis">A demonstration of commitment and enthusiasm</span></li>
-          <li>A live dashboard built from CCAI's public data. <span class="li-emphasis">A demonstration of the kind of impact reporting the role requires</span></li>
+          <li>A bespoke application for the Director of Operations &amp; Projects role at Climate Change AI. <span class="li-emphasis">A demonstration of the thinking I'd bring from day one</span></li>
+          <li>A prototype strategic operations dashboard. <span class="li-emphasis">The kind of decision-support tool this role would build by Day 90</span></li>
           <li>An operational diagnosis. <span class="li-emphasis">Some informed thought-starters of where to focus first</span></li>
           <li>A first 90 days sketch showing how I'd approach the role</li>
         </ul>
@@ -590,152 +795,333 @@
     </div>
   </section>
 
-  <!-- IMPACT DASHBOARD -->
+  <!-- STRATEGIC OPERATIONS DASHBOARD -->
   <section id="dashboard">
     <div class="section-inner">
-      <div class="section-label fade-up">Impact data</div>
-      <h2 class="section-title fade-up">CCAI by the numbers</h2>
-      <p class="section-intro fade-up">A snapshot of CCAI's reach and output, built from publicly available data. This is the kind of impact reporting infrastructure the Director of Operations role would own.</p>
+      <div class="section-label fade-up">Strategic operations</div>
+      <h2 class="section-title fade-up">Portfolio health &amp; strategic alignment</h2>
+      <p class="section-intro fade-up">A prototype of the operational reporting infrastructure this role would own. This mock dashboard connects CCAI's programme activity to strategic goals — turning data into decisions, not just metrics.</p>
 
-      <!-- Stat Cards -->
-      <div class="stat-grid fade-up">
-        <div class="stat-card">
-          <div class="stat-number" data-target="600" data-suffix="+">0</div>
-          <div class="stat-unit">Workshop papers</div>
+      <!-- Row 1: Strategic alignment scorecard -->
+      <div class="dashboard-card fade-up" style="margin-bottom: 1.5rem;">
+        <h3>Programme alignment to strategic goals</h3>
+        <div class="matrix-legend">
+          <span><span class="legend-swatch" style="background: var(--green-primary);"></span> Strong</span>
+          <span><span class="legend-swatch" style="background: var(--green-primary); opacity: 0.5;"></span> Moderate</span>
+          <span><span class="legend-swatch" style="background: var(--green-primary); opacity: 0.15;"></span> Minimal</span>
         </div>
-        <div class="stat-card">
-          <div class="stat-number" data-target="23">0</div>
-          <div class="stat-unit">Funded projects</div>
+        <div style="overflow-x: auto;">
+          <table class="alignment-matrix">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Grants</th>
+                <th>Events</th>
+                <th>Summer School</th>
+                <th>Policy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Expertise</td>
+                <td><span class="alignment-cell strong"></span></td>
+                <td><span class="alignment-cell strong"></span></td>
+                <td><span class="alignment-cell strong"></span></td>
+                <td><span class="alignment-cell moderate"></span></td>
+              </tr>
+              <tr>
+                <td>Education</td>
+                <td><span class="alignment-cell moderate"></span></td>
+                <td><span class="alignment-cell moderate"></span></td>
+                <td><span class="alignment-cell strong"></span></td>
+                <td><span class="alignment-cell strong"></span></td>
+              </tr>
+              <tr>
+                <td>Coordination</td>
+                <td><span class="alignment-cell moderate"></span></td>
+                <td><span class="alignment-cell strong"></span></td>
+                <td><span class="alignment-cell moderate"></span></td>
+                <td><span class="alignment-cell strong"></span></td>
+              </tr>
+              <tr>
+                <td>Research-to-deployment</td>
+                <td><span class="alignment-cell strong"></span></td>
+                <td><span class="alignment-cell moderate"></span></td>
+                <td><span class="alignment-cell minimal"></span></td>
+                <td><span class="alignment-cell strong"></span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="stat-card">
-          <div class="stat-number" data-target="1.4" data-prefix="$" data-suffix="M" data-decimals="1">0</div>
-          <div class="stat-unit">Annual grants</div>
+        <p class="matrix-insight">Observation: Research-to-deployment alignment is concentrated in Grants and Policy. Events and Summer School may be under-leveraged for bridging research into practice.</p>
+      </div>
+
+      <!-- Row 2: Programme portfolio health (2x2 grid) -->
+      <div class="dashboard-grid fade-up">
+        <div class="programme-card">
+          <h3>Grants programme</h3>
+          <div class="programme-stats">
+            <div>
+              <div class="programme-stat-num stat-number" data-target="23">0</div>
+              <div class="programme-stat-label">Funded projects</div>
+            </div>
+            <div>
+              <div class="programme-stat-num">$1.4M</div>
+              <div class="programme-stat-label">Deployed</div>
+            </div>
+            <div>
+              <div class="programme-stat-num stat-number" data-target="62">0</div>
+              <div class="programme-stat-label">Institutions</div>
+            </div>
+          </div>
+          <div class="status-indicator">
+            <span class="status-dot green"></span>
+            <span class="status-label">On track</span>
+          </div>
+          <p class="programme-note">Pipeline healthy. Next decision: Q3 call scope and regional targeting.</p>
         </div>
-        <div class="stat-card">
-          <div class="stat-number" data-target="160" data-suffix="+">0</div>
-          <div class="stat-unit">Countries reached</div>
+        <div class="programme-card">
+          <h3>Events &amp; workshops</h3>
+          <div class="programme-stats">
+            <div>
+              <div class="programme-stat-num stat-number" data-target="6">0</div>
+              <div class="programme-stat-label">NeurIPS workshops</div>
+            </div>
+            <div>
+              <div class="programme-stat-num">4/yr</div>
+              <div class="programme-stat-label">Conferences</div>
+            </div>
+            <div>
+              <div class="programme-stat-num">~2,000</div>
+              <div class="programme-stat-label">Attendees</div>
+            </div>
+          </div>
+          <div class="status-indicator">
+            <span class="status-dot yellow"></span>
+            <span class="status-label">Monitor</span>
+          </div>
+          <p class="programme-note">High delivery load relative to staff capacity. Volunteer coordination is the bottleneck.</p>
+        </div>
+        <div class="programme-card">
+          <h3>Summer school</h3>
+          <div class="programme-stats">
+            <div>
+              <div class="programme-stat-num stat-number" data-target="3">0</div>
+              <div class="programme-stat-label">Cohorts delivered</div>
+            </div>
+            <div>
+              <div class="programme-stat-num">160+</div>
+              <div class="programme-stat-label">Countries reached</div>
+            </div>
+            <div>
+              <div class="programme-stat-num">Mixed</div>
+              <div class="programme-stat-label">Format</div>
+            </div>
+          </div>
+          <div class="status-indicator">
+            <span class="status-dot green"></span>
+            <span class="status-label">On track</span>
+          </div>
+          <p class="programme-note">2024 hybrid model is sustainable. Key question: should 2025 scale virtual or deepen in-person?</p>
+        </div>
+        <div class="programme-card">
+          <h3>Policy &amp; reports</h3>
+          <div class="programme-stats">
+            <div>
+              <div class="programme-stat-num stat-number" data-target="3">0</div>
+              <div class="programme-stat-label">Major reports</div>
+            </div>
+            <div>
+              <div class="programme-stat-num">IPCC</div>
+              <div class="programme-stat-label">Engagement</div>
+            </div>
+            <div>
+              <div class="programme-stat-num">COP</div>
+              <div class="programme-stat-label">Presence</div>
+            </div>
+          </div>
+          <div class="status-indicator">
+            <span class="status-dot yellow"></span>
+            <span class="status-label">Monitor</span>
+          </div>
+          <p class="programme-note">Impact is high but hard to measure. Needs an attribution framework for policy influence.</p>
         </div>
       </div>
 
-      <!-- Charts row -->
-      <div class="dashboard-grid fade-up">
-        <!-- Summer school growth -->
+      <!-- Row 3: Resource & capacity view (2-col grid) -->
+      <div class="dashboard-grid fade-up" style="margin-top: 1.5rem;">
+        <!-- Card A: Staff & volunteer capacity -->
         <div class="dashboard-card">
-          <h3>Summer school growth</h3>
-          <div class="chart-container">
-            <canvas id="summerSchoolChart"></canvas>
-          </div>
-        </div>
-
-        <!-- Workshop presence -->
-        <div class="dashboard-card">
-          <h3>Workshop presence at major ML conferences</h3>
+          <h3>Staff &amp; volunteer capacity</h3>
+          <p style="font-size: 0.78rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--grey-mid); margin-bottom: 0.8rem;">Staff time allocation</p>
           <div class="bar-section">
             <div class="bar-row">
-              <span class="bar-label">NeurIPS</span>
+              <span class="bar-label">Grants</span>
               <div class="bar-track">
-                <div class="bar-fill green" style="--target-width: 100%;"></div>
+                <div class="bar-fill green" style="--target-width: 30%;"></div>
               </div>
-              <span class="bar-value">6 yrs</span>
+              <span class="bar-value">30%</span>
             </div>
             <div class="bar-row">
-              <span class="bar-label">ICLR</span>
+              <span class="bar-label">Events</span>
               <div class="bar-track">
-                <div class="bar-fill blue" style="--target-width: 67%;"></div>
+                <div class="bar-fill green" style="--target-width: 25%;"></div>
               </div>
-              <span class="bar-value">4 yrs</span>
+              <span class="bar-value">25%</span>
             </div>
             <div class="bar-row">
-              <span class="bar-label">ICML</span>
+              <span class="bar-label">Summer Sch.</span>
               <div class="bar-track">
-                <div class="bar-fill teal" style="--target-width: 33%;"></div>
+                <div class="bar-fill green" style="--target-width: 20%;"></div>
               </div>
-              <span class="bar-value">2 yrs</span>
+              <span class="bar-value">20%</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">Policy</span>
+              <div class="bar-track">
+                <div class="bar-fill green" style="--target-width: 15%;"></div>
+              </div>
+              <span class="bar-value">15%</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">Ops/Admin</span>
+              <div class="bar-track">
+                <div class="bar-fill green" style="--target-width: 10%;"></div>
+              </div>
+              <span class="bar-value">10%</span>
             </div>
           </div>
-          <div style="margin-top: 1.5rem;">
-            <h3 style="margin-bottom: 1rem;">Grants programme reach</h3>
-            <div class="bar-row">
-              <span class="bar-label">Projects</span>
-              <div class="bar-track">
-                <div class="bar-fill green" style="--target-width: 37%;"></div>
-              </div>
-              <span class="bar-value">23</span>
+          <p style="font-size: 0.78rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--grey-mid); margin-top: 1.2rem; margin-bottom: 0.6rem;">Volunteer engagement</p>
+          <div class="volunteer-stats">
+            <div class="volunteer-stat">
+              <div class="volunteer-stat-num stat-number" data-target="35">0</div>
+              <div class="volunteer-stat-label">Active</div>
             </div>
-            <div class="bar-row">
-              <span class="bar-label">Institutions</span>
-              <div class="bar-track">
-                <div class="bar-fill green" style="--target-width: 100%;"></div>
-              </div>
-              <span class="bar-value">62</span>
+            <div class="volunteer-stat">
+              <div class="volunteer-stat-num stat-number" data-target="12">0</div>
+              <div class="volunteer-stat-label">Occasional</div>
             </div>
-            <div class="bar-row">
-              <span class="bar-label">Countries</span>
-              <div class="bar-track">
-                <div class="bar-fill green" style="--target-width: 35%;"></div>
+            <div class="volunteer-stat">
+              <div class="volunteer-stat-num stat-number" data-target="8">0</div>
+              <div class="volunteer-stat-label">Dormant</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card B: Budget allocation vs. strategic weight -->
+        <div class="dashboard-card">
+          <h3>Budget allocation vs. strategic weight</h3>
+          <div class="paired-legend">
+            <span><span class="paired-legend-swatch" style="background: var(--green-primary);"></span> Budget %</span>
+            <span><span class="paired-legend-swatch" style="background: var(--blue-primary);"></span> Strategic weight %</span>
+          </div>
+          <div class="paired-bar-group">
+            <div class="paired-bar-label">Expertise</div>
+            <div class="paired-bar-row">
+              <span class="paired-bar-tag">Budget</span>
+              <div class="paired-bar-track">
+                <div class="paired-bar-fill" style="--target-width: 30%; background: var(--green-primary);"></div>
               </div>
-              <span class="bar-value">22</span>
+              <span class="paired-bar-val">30%</span>
+            </div>
+            <div class="paired-bar-row">
+              <span class="paired-bar-tag">Strategic</span>
+              <div class="paired-bar-track">
+                <div class="paired-bar-fill" style="--target-width: 25%; background: var(--blue-primary);"></div>
+              </div>
+              <span class="paired-bar-val">25%</span>
+            </div>
+          </div>
+          <div class="paired-bar-group">
+            <div class="paired-bar-label">Education</div>
+            <div class="paired-bar-row">
+              <span class="paired-bar-tag">Budget</span>
+              <div class="paired-bar-track">
+                <div class="paired-bar-fill" style="--target-width: 25%; background: var(--green-primary);"></div>
+              </div>
+              <span class="paired-bar-val">25%</span>
+            </div>
+            <div class="paired-bar-row">
+              <span class="paired-bar-tag">Strategic</span>
+              <div class="paired-bar-track">
+                <div class="paired-bar-fill" style="--target-width: 25%; background: var(--blue-primary);"></div>
+              </div>
+              <span class="paired-bar-val">25%</span>
+            </div>
+          </div>
+          <div class="paired-bar-group">
+            <div class="paired-bar-label">Coordination</div>
+            <div class="paired-bar-row">
+              <span class="paired-bar-tag">Budget</span>
+              <div class="paired-bar-track">
+                <div class="paired-bar-fill" style="--target-width: 15%; background: var(--green-primary);"></div>
+              </div>
+              <span class="paired-bar-val">15%</span>
+            </div>
+            <div class="paired-bar-row">
+              <span class="paired-bar-tag">Strategic</span>
+              <div class="paired-bar-track">
+                <div class="paired-bar-fill" style="--target-width: 25%; background: var(--blue-primary);"></div>
+              </div>
+              <span class="paired-bar-val">25%</span>
+            </div>
+          </div>
+          <div class="paired-bar-group" style="margin-bottom: 0;">
+            <div class="paired-bar-label">Research-to-deployment</div>
+            <div class="paired-bar-row">
+              <span class="paired-bar-tag">Budget</span>
+              <div class="paired-bar-track">
+                <div class="paired-bar-fill" style="--target-width: 30%; background: var(--green-primary);"></div>
+              </div>
+              <span class="paired-bar-val">30%</span>
+            </div>
+            <div class="paired-bar-row">
+              <span class="paired-bar-tag">Strategic</span>
+              <div class="paired-bar-track">
+                <div class="paired-bar-fill" style="--target-width: 25%; background: var(--blue-primary);"></div>
+              </div>
+              <span class="paired-bar-val">25%</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Map -->
-      <div class="map-card fade-up">
-        <h3>Global reach</h3>
-        <div class="map-container">
-          <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simplified world map showing CCAI's global presence across five continents">
-            <!-- North America -->
-            <path d="M 120 80 L 180 60 L 260 70 L 280 100 L 300 130 L 280 160 L 260 200 L 240 220 L 200 240 L 170 230 L 140 200 L 120 160 L 100 120 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
-            <!-- Central America -->
-            <path d="M 200 240 L 220 260 L 230 290 L 210 300 L 190 280 L 180 260 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
-            <!-- South America -->
-            <path d="M 230 290 L 260 300 L 290 330 L 300 370 L 290 410 L 270 440 L 250 450 L 230 430 L 220 390 L 210 350 L 220 320 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
-            <!-- Europe -->
-            <path d="M 440 70 L 480 60 L 520 65 L 540 80 L 530 110 L 510 130 L 490 140 L 470 130 L 450 120 L 430 100 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
-            <!-- Africa -->
-            <path d="M 460 160 L 500 150 L 540 160 L 560 200 L 570 250 L 560 300 L 540 340 L 520 370 L 500 380 L 480 370 L 460 340 L 450 300 L 440 250 L 440 200 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
-            <!-- Asia -->
-            <path d="M 540 60 L 600 50 L 680 55 L 760 70 L 820 90 L 840 120 L 830 150 L 800 170 L 760 180 L 720 170 L 680 160 L 640 150 L 600 140 L 570 130 L 550 110 L 540 80 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
-            <!-- South/Southeast Asia -->
-            <path d="M 640 160 L 680 170 L 720 180 L 740 200 L 760 230 L 740 250 L 710 240 L 680 220 L 650 200 L 640 180 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
-            <!-- Oceania -->
-            <path d="M 780 300 L 830 290 L 870 310 L 880 340 L 870 370 L 840 380 L 810 370 L 790 350 L 780 330 Z" fill="#d4e8e2" stroke="var(--green-primary)" stroke-width="0.8"/>
-            <!-- Key hubs -->
-            <circle cx="230" cy="130" r="5" fill="var(--green-primary)" opacity="0.7"/>
-            <text x="230" y="120" text-anchor="middle" font-family="Karla, sans-serif" font-size="8" fill="var(--dark)" font-weight="500">MONTREAL</text>
-            <circle cx="490" cy="100" r="4" fill="var(--blue-primary)" opacity="0.7"/>
-            <circle cx="680" cy="120" r="4" fill="var(--blue-primary)" opacity="0.7"/>
-            <circle cx="830" cy="340" r="4" fill="var(--blue-primary)" opacity="0.7"/>
-            <circle cx="500" cy="300" r="4" fill="var(--blue-primary)" opacity="0.7"/>
-            <circle cx="260" cy="350" r="4" fill="var(--blue-primary)" opacity="0.7"/>
-          </svg>
-        </div>
-        <div class="map-stats">
-          <div class="map-stat">
-            <div class="map-stat-num">62</div>
-            <div class="map-stat-label">Institutions</div>
-          </div>
-          <div class="map-stat">
-            <div class="map-stat-num">22</div>
-            <div class="map-stat-label">Countries</div>
-          </div>
-          <div class="map-stat">
-            <div class="map-stat-num">5</div>
-            <div class="map-stat-label">Continents</div>
-          </div>
-          <div class="map-stat">
-            <div class="map-stat-num">50+</div>
-            <div class="map-stat-label">Core volunteers</div>
-          </div>
-          <div class="map-stat">
-            <div class="map-stat-num">40+</div>
-            <div class="map-stat-label">Partner orgs</div>
-          </div>
-        </div>
+      <!-- Row 4: Decisions needed -->
+      <div class="dashboard-card fade-up" style="margin-top: 1.5rem;">
+        <h3>Leadership decisions this quarter</h3>
+        <ul class="decision-list">
+          <li class="decision-item">
+            <div>
+              <div class="decision-title">Scale 2025 Summer School virtual track or invest in regional in-person cohorts?</div>
+              <div class="decision-context">Virtual reach is 100x in-person, but completion rates and network effects differ significantly.</div>
+            </div>
+            <span class="decision-tag">Education</span>
+          </li>
+          <li class="decision-item">
+            <div>
+              <div class="decision-title">Expand grants programme geographic scope to underrepresented regions?</div>
+              <div class="decision-context">22 countries currently funded. Africa and Southeast Asia have high climate-AI need but low application volume.</div>
+            </div>
+            <span class="decision-tag">Grants</span>
+          </li>
+          <li class="decision-item">
+            <div>
+              <div class="decision-title">Formalise volunteer coordination role before next NeurIPS cycle?</div>
+              <div class="decision-context">Current model relies on informal coordination. Risk of volunteer burnout and institutional knowledge loss.</div>
+            </div>
+            <span class="decision-tag">Operations</span>
+          </li>
+          <li class="decision-item">
+            <div>
+              <div class="decision-title">Develop policy impact attribution framework for funder reporting?</div>
+              <div class="decision-context">Policy stream has qualitative evidence of influence but no systematic way to report it.</div>
+            </div>
+            <span class="decision-tag">Policy</span>
+          </li>
+        </ul>
       </div>
 
-      <p class="dashboard-source fade-up">Dashboard built from publicly available sources. Data current as of March 2026.</p>
+      <p class="dashboard-source fade-up">Prototype dashboard with illustrative data. A working version would connect to CCAI's project management, financial, and CRM systems. Data is representative, not actual.</p>
     </div>
   </section>
 
@@ -770,12 +1156,12 @@
     <div class="section-inner">
       <div class="section-label fade-up">Relevant experience</div>
       <h2 class="section-title fade-up">What I bring to this</h2>
-      <p class="section-intro fade-up">Not a CV — a direct mapping of my experience to the three operational opportunities above.</p>
+      <p class="section-intro fade-up">Mapping of my experience to the three operational opportunities above.</p>
       <div class="experience-content">
         <div class="experience-text fade-up">
-          <p><strong>Multi-stakeholder programme delivery.</strong> At Economist Impact, I managed multi-country research programmes involving governments, NGOs, academic institutions, and private sector partners across different geographies and time zones. This is the same coordination challenge CCAI faces with its volunteer network and global programme portfolio — and I've done it at the level where budgets, timelines, and stakeholder relationships all have to hold together simultaneously.</p>
-          <p><strong>Research rigour meets operational delivery.</strong> My career has two threads that reinforce each other: deep analytical work (evidence synthesis, policy research, sustainability frameworks) and hands-on operational delivery (programme management, budget management, cross-functional coordination). This combination is rare and directly relevant to a role that requires both building reporting systems and running programmes.</p>
-          <p><strong>AI and climate domain knowledge.</strong> My current academic research — developing a quality assessment framework for AI-assisted Scope 3 emissions estimation — sits squarely at CCAI's intersection of AI and climate action. I understand the technical landscape, the methodological challenges, and the gap between what AI tools promise and what they deliver. This isn't adjacent knowledge — it's direct mission relevance.</p>
+          <p><strong>Volunteer CRM &amp; coordination systems.</strong> At IKEA, I built a cross-country advocacy hub that took 30+ country teams from strategy education through campaign development to reporting — a SharePoint workflow designed around what teams actually needed, not what HQ assumed. The pattern is the same one CCAI needs: listen to distributed contributors, reduce friction, create structure without bureaucracy.</p>
+          <p><strong>Programmatic impact dashboard.</strong> I have developed sustainability and social impact reporting frameworks for corporate clients that look at outputs, outcomes, and impact. I have created reporting dashboards for every program at Economist Impact to demonstrate performance and provide the insight for recommendations for future work. I have the knowledge, expertise, and experience to turn metrics into tangible actions.</p>
+          <p><strong>Decision science lens.</strong> My current independent research applies multi-criteria decision analysis (AHP-TOPSIS) to sustainability materiality assessment — turning a subjective process into a structured one. I'd bring the same rigour to CCAI's resource allocation and programme prioritisation decisions.</p>
           <p><strong>Independent, remote, self-directed.</strong> I've worked independently across UK, European, and South African contexts for years. I'm used to operating autonomously in distributed teams, flagging issues early, and building my own structure. CCAI's remote-first, globally distributed model is how I already work.</p>
         </div>
         <div class="experience-aside fade-up" style="transition-delay: 0.1s;">
@@ -910,46 +1296,48 @@
     document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
 
     // ─── STAT NUMBER ANIMATION ───
-    function animateStatNumbers() {
-      document.querySelectorAll('.stat-number[data-target]').forEach(el => {
-        const target = parseFloat(el.dataset.target);
-        const prefix = el.dataset.prefix || '';
-        const suffix = el.dataset.suffix || '';
-        const decimals = parseInt(el.dataset.decimals) || 0;
-        const duration = 1500;
-        const start = performance.now();
+    function animateStatNumber(el) {
+      const target = parseFloat(el.dataset.target);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const decimals = parseInt(el.dataset.decimals) || 0;
+      const duration = 1500;
+      const start = performance.now();
 
-        function tick(now) {
-          const t = Math.min((now - start) / duration, 1);
-          const ease = 1 - Math.pow(1 - t, 3);
-          const val = ease * target;
-          if (decimals > 0) {
-            el.textContent = prefix + val.toFixed(decimals) + suffix;
-          } else {
-            el.textContent = prefix + Math.round(val).toLocaleString() + suffix;
-          }
-          if (t < 1) requestAnimationFrame(tick);
+      function tick(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        const val = ease * target;
+        if (decimals > 0) {
+          el.textContent = prefix + val.toFixed(decimals) + suffix;
+        } else {
+          el.textContent = prefix + Math.round(val).toLocaleString() + suffix;
         }
-        requestAnimationFrame(tick);
-      });
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     }
 
-    const statGrid = document.querySelector('.stat-grid');
     const statObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          animateStatNumbers();
+          entry.target.querySelectorAll('.stat-number[data-target]').forEach(animateStatNumber);
           statObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.2 });
-    statObserver.observe(statGrid);
+
+    document.querySelectorAll('.dashboard-grid, .dashboard-card').forEach(el => {
+      if (el.querySelector('.stat-number[data-target]')) {
+        statObserver.observe(el);
+      }
+    });
 
     // ─── BAR FILL ANIMATION ───
     const barObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.bar-fill').forEach(bar => {
+          entry.target.querySelectorAll('.bar-fill, .paired-bar-fill').forEach(bar => {
             bar.classList.add('animated');
           });
           barObserver.unobserve(entry.target);
@@ -960,86 +1348,6 @@
     document.querySelectorAll('.dashboard-card').forEach(card => {
       barObserver.observe(card);
     });
-
-    // ─── CHART.JS — SUMMER SCHOOL GROWTH ───
-    const chartObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          initSummerSchoolChart();
-          chartObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-
-    const chartCanvas = document.getElementById('summerSchoolChart');
-    chartObserver.observe(chartCanvas.closest('.dashboard-card'));
-
-    function initSummerSchoolChart() {
-      Chart.defaults.font.family = "'Karla', sans-serif";
-
-      new Chart(chartCanvas, {
-        type: 'bar',
-        data: {
-          labels: ['2022', '2023', '2024'],
-          datasets: [{
-            label: 'Summer school reach',
-            data: [73, 10000, 5000],
-            backgroundColor: ['#448A79', '#448A79', '#448A79'],
-            borderRadius: 0,
-            barThickness: 40
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          animation: {
-            duration: 1200,
-            easing: 'easeOutCubic'
-          },
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              callbacks: {
-                label: function(ctx) {
-                  const labels = [
-                    '73 selected participants (29 countries)',
-                    '10,000+ virtual registrants (160+ countries)',
-                    '34 in-person + 1000s virtual (150+ countries)'
-                  ];
-                  return labels[ctx.dataIndex];
-                }
-              },
-              backgroundColor: '#252525',
-              titleFont: { family: "'Karla', sans-serif", size: 11 },
-              bodyFont: { family: "'Karla', sans-serif", size: 12 },
-              padding: 12,
-              cornerRadius: 2
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              grid: { color: 'rgba(0,0,0,0.04)', drawBorder: false },
-              ticks: {
-                font: { family: "'Karla', sans-serif", size: 10 },
-                color: '#aaaaaa',
-                callback: function(val) {
-                  if (val >= 1000) return (val / 1000) + 'k';
-                  return val;
-                }
-              }
-            },
-            x: {
-              grid: { display: false },
-              ticks: {
-                font: { family: "'Karla', sans-serif", size: 11, weight: 500 },
-                color: '#757575'
-              }
-            }
-          }
-        }
-      });
-    }
   </script>
 </body>
 </html>
