@@ -11,7 +11,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <style>
     :root {
       --green-primary: #448A79;
@@ -26,21 +25,19 @@
       --white: #fcfcfc;
       --creme: #F3F2F1;
       --teal-dark: #264C4B;
-      --hero-start: #1B4F42;
-      --hero-end: #223C57;
       --border: #eeeeee;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
-
+    html { font-size: 16px; }
     body {
       font-family: 'Karla', sans-serif;
       color: var(--grey-dark);
       background: var(--white);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      height: 100vh;
+      overflow: hidden;
     }
 
     /* ─── NAV ─── */
@@ -48,28 +45,25 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: var(--dark);
       padding: 0 2rem;
-      transition: box-shadow 0.3s;
-    }
-    nav.scrolled {
-      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
     }
     .nav-inner {
-      max-width: 1100px; margin: 0 auto;
+      max-width: 1400px; margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between;
-      height: 64px;
+      height: 56px;
     }
     .nav-name {
       font-family: 'Karla', sans-serif;
-      font-size: 0.95rem; font-weight: 500;
+      font-size: 0.9rem; font-weight: 500;
       color: var(--white);
       text-decoration: none;
       letter-spacing: 0.04em;
     }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
     .nav-links a {
-      text-decoration: none; color: rgba(252,252,252,0.7);
-      font-size: 0.85rem; font-weight: 400;
+      text-decoration: none; color: rgba(252,252,252,0.6);
+      font-size: 0.82rem; font-weight: 400;
       transition: color 0.3s;
+      cursor: pointer;
     }
     .nav-links a:hover { color: var(--white); }
 
@@ -78,8 +72,7 @@
       display: none;
       background: none; border: none; cursor: pointer;
       width: 32px; height: 32px;
-      position: relative;
-      z-index: 110;
+      position: relative; z-index: 110;
     }
     .menu-toggle span {
       display: block; width: 22px; height: 2px;
@@ -94,650 +87,412 @@
     .menu-toggle.active span:nth-child(2) { opacity: 0; }
     .menu-toggle.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-    /* ─── HERO ─── */
-    .hero {
-      min-height: 80vh;
-      display: flex; align-items: center;
-      padding: 8rem 2rem 5rem;
+    /* ─── PAGE LAYOUT ─── */
+    .page {
+      height: calc(100vh - 56px);
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: 53% 47%;
+    }
+
+    /* ─── CAROUSEL COLUMN ─── */
+    .carousel-col {
+      display: flex;
+      flex-direction: column;
+      padding: 2.5rem 3.5rem 1.5rem;
+    }
+    .carousel-wrap {
+      flex: 1;
       position: relative;
-      overflow: hidden;
-      background: var(--teal-dark);
-      color: var(--white);
     }
-    .hero-inner {
-      max-width: 1100px; margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
-      align-items: center;
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      pointer-events: none;
     }
-    .hero-text h1 {
-      font-family: 'Cormorant', serif;
-      font-size: 3rem; line-height: 1.15;
-      font-weight: 500;
-      color: var(--white);
-      margin-bottom: 1.5rem;
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
     }
-    .hero-text p {
-      font-size: 1rem; color: rgba(252,252,252,0.75);
-      max-width: 480px; margin-bottom: 2rem;
-      line-height: 1.8;
-    }
-    .hero-cta {
-      display: inline-block;
-      padding: 0.7rem 1.8rem;
-      background: var(--green-primary);
-      color: var(--white);
-      text-decoration: none;
-      border-radius: 4px;
+    .slide-label {
+      font-size: 0.7rem;
       font-weight: 600;
-      font-size: 0.88rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      transition: background 0.3s;
-    }
-    .hero-cta:hover {
-      background: var(--green-secondary);
-    }
-
-    .hero-card {
-      background: rgba(252,252,252,0.06);
-      border: 1px solid rgba(252,252,252,0.12);
-      padding: 2rem;
-    }
-    .hero-card h3 {
-      font-family: 'Cormorant', serif;
-      font-size: 1.2rem; font-weight: 500;
-      color: var(--white);
-      margin-bottom: 1.2rem;
-      padding-bottom: 0.8rem;
-      border-bottom: 1px dotted rgba(252,252,252,0.25);
-    }
-    .deliverable-list { list-style: none; }
-    .deliverable-list li {
-      padding: 0.5rem 0;
-      font-size: 0.9rem;
-      color: rgba(252,252,252,0.8);
-      display: flex; align-items: flex-start; gap: 0.7rem;
-      flex-wrap: wrap;
-      line-height: 1.6;
-    }
-    .deliverable-list li::before {
-      content: '';
-      display: block;
-      width: 4px; height: 4px;
-      background: var(--green-primary);
-      border-radius: 50%;
-      margin-top: 0.6rem;
-      flex-shrink: 0;
-    }
-    .deliverable-list .li-emphasis {
-      display: block;
-      width: 100%;
-      color: rgba(252,252,252,0.5);
-      font-style: italic;
-      font-size: 0.85rem;
-    }
-
-    /* ─── SECTION COMMON ─── */
-    section { padding: 5rem 2rem; }
-    .section-inner { max-width: 1100px; margin: 0 auto; }
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--green-primary);
-      margin-bottom: 0.6rem;
-    }
-    .section-title {
-      font-family: 'Cormorant', serif;
-      font-size: 2rem; font-weight: 500;
-      color: var(--dark);
       margin-bottom: 1rem;
     }
-    .section-intro {
-      font-size: 1rem; color: var(--grey-mid);
-      max-width: 680px; margin-bottom: 3rem;
-    }
-
-    /* ─── DASHBOARD ─── */
-    #dashboard {
-      background: var(--creme);
-    }
-    .stat-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-    .stat-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      padding: 1.5rem;
-    }
-    .stat-card::before {
-      content: '';
-      display: block;
-      width: 24px; height: 3px;
-      background: var(--green-primary);
-      margin-bottom: 1rem;
-    }
-    .stat-card:nth-child(2)::before { background: var(--blue-primary); }
-    .stat-card:nth-child(3)::before { background: var(--yellow); }
-    .stat-card:nth-child(4)::before { background: var(--green-secondary); }
-
-    .stat-number {
-      font-family: 'Karla', sans-serif;
-      font-size: 2rem; font-weight: 600;
-      color: var(--dark);
-      line-height: 1;
-      margin-bottom: 0.4rem;
-    }
-    .stat-unit {
-      font-size: 0.72rem; font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--grey-mid);
-    }
-
-    /* Dashboard sub-sections */
-    .dashboard-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .dashboard-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      padding: 2rem;
-    }
-    .dashboard-card h3 {
+    .slide h1 {
       font-family: 'Cormorant', serif;
-      font-size: 1.1rem; font-weight: 500;
+      font-size: 2.5rem;
+      font-weight: 500;
       color: var(--dark);
-      margin-bottom: 1.5rem;
+      line-height: 1.15;
+      margin-bottom: 1.3rem;
     }
-    .chart-container {
-      position: relative;
-      height: 220px;
-    }
-
-    /* Bar rows */
-    .bar-section { margin-top: 0.5rem; }
-    .bar-row {
-      display: flex; align-items: center; gap: 0.8rem;
-      margin-bottom: 1rem;
-    }
-    .bar-label {
-      font-size: 0.75rem; font-weight: 500;
-      color: var(--dark);
-      min-width: 70px;
-    }
-    .bar-track {
-      flex: 1;
-      height: 16px;
-      background: var(--creme);
-      overflow: hidden;
-    }
-    .bar-fill {
-      height: 100%;
-      width: 0;
-      transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .bar-fill.animated { width: var(--target-width); }
-    .bar-fill.green { background: var(--green-primary); }
-    .bar-fill.blue { background: var(--blue-primary); }
-    .bar-fill.teal { background: var(--green-secondary); }
-    .bar-value {
-      font-size: 0.75rem; font-weight: 500;
-      color: var(--grey-mid);
-      min-width: 50px;
-      text-align: right;
-    }
-
-    /* SVG Map */
-    .map-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      padding: 2rem;
-    }
-    .map-card h3 {
+    .slide h2 {
       font-family: 'Cormorant', serif;
-      font-size: 1.1rem; font-weight: 500;
+      font-size: 1.9rem;
+      font-weight: 500;
       color: var(--dark);
-      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
     }
-    .map-container {
-      text-align: center;
-      margin-bottom: 1.5rem;
+    .slide > p {
+      font-size: 0.92rem;
+      color: var(--grey-dark);
+      line-height: 1.8;
+      max-width: 480px;
     }
-    .map-container svg {
-      width: 100%;
-      max-width: 700px;
-      height: auto;
-    }
-    .map-stats {
-      display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
-    }
-    .map-stat {
-      text-align: center;
-    }
-    .map-stat-num {
-      font-size: 1.4rem; font-weight: 600;
-      color: var(--dark);
-    }
-    .map-stat-label {
-      font-size: 0.68rem; font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--grey-mid);
-    }
-
-    .dashboard-source {
+    .slide-role {
+      display: inline-block;
+      margin-top: 1.5rem;
       font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--grey-mid);
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border);
+    }
+
+    /* Experience items (slide 2) */
+    .experience-items {
+      max-width: 500px;
+    }
+    .experience-item {
+      margin-bottom: 0.9rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--green-primary);
+    }
+    .experience-item:nth-child(2) { border-left-color: var(--blue-primary); }
+    .experience-item:nth-child(3) { border-left-color: var(--yellow); }
+    .experience-item:nth-child(4) { border-left-color: var(--green-secondary); }
+    .experience-item-title {
+      font-family: 'Cormorant', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 0.15rem;
+    }
+    .experience-item-desc {
+      font-size: 0.82rem;
+      color: var(--grey-mid);
+      line-height: 1.5;
+    }
+
+    /* Focus items (slide 3) */
+    .focus-items {
+      max-width: 500px;
+    }
+    .focus-item {
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--green-primary);
+    }
+    .focus-item:nth-child(2) { border-left-color: var(--blue-primary); }
+    .focus-item:nth-child(3) { border-left-color: var(--yellow); }
+    .focus-stat {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green-primary);
+      margin-bottom: 0.15rem;
+    }
+    .focus-item:nth-child(2) .focus-stat { color: var(--blue-primary); }
+    .focus-item:nth-child(3) .focus-stat { color: var(--yellow); }
+    .focus-title {
+      font-family: 'Cormorant', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 0.2rem;
+    }
+    .focus-desc {
+      font-size: 0.82rem;
+      color: var(--grey-mid);
+      line-height: 1.5;
+    }
+
+    /* Throughline slide (slide 4) */
+    .mini-timeline {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+      max-width: 400px;
+    }
+    .mini-phase { flex: 1; }
+    .mini-phase-bar {
+      height: 2px;
+      margin-bottom: 0.5rem;
+    }
+    .mini-phase:nth-child(1) .mini-phase-bar { background: var(--green-primary); }
+    .mini-phase:nth-child(2) .mini-phase-bar { background: var(--blue-primary); }
+    .mini-phase:nth-child(3) .mini-phase-bar { background: var(--yellow); }
+    .mini-phase-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--grey-light);
-      text-align: center;
-      margin-top: 2rem;
-      font-style: italic;
+      margin-bottom: 0.15rem;
+    }
+    .mini-phase-name {
+      font-family: 'Cormorant', serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--dark);
+    }
+    .contact-links {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+    .contact-link {
+      display: inline-block;
+      padding: 0.5rem 1.3rem;
+      border: 1px solid var(--border);
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.82rem;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .contact-link:hover {
+      border-color: var(--dark);
+      background: var(--creme);
+    }
+    .contact-location {
+      margin-top: 0.8rem;
+      font-size: 0.78rem;
+      color: var(--grey-light);
+    }
+
+    /* ─── CAROUSEL CONTROLS ─── */
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding-top: 0.5rem;
+    }
+    .carousel-arrow {
+      background: none;
+      border: 1px solid var(--border);
+      width: 32px; height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--grey-mid);
+      font-size: 0.85rem;
+      transition: border-color 0.3s, color 0.3s;
+      line-height: 1;
+    }
+    .carousel-arrow:hover:not(:disabled) {
+      border-color: var(--dark);
+      color: var(--dark);
+    }
+    .carousel-arrow:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+    .carousel-dots {
+      display: flex;
+      gap: 0.4rem;
+      margin: 0 0.4rem;
+    }
+    .carousel-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      border: none;
+      background: var(--grey-light);
+      cursor: pointer;
+      transition: background 0.3s;
+      padding: 0;
+    }
+    .carousel-dot.active {
+      background: var(--green-primary);
+    }
+    .carousel-counter {
+      font-size: 0.72rem;
+      color: var(--grey-light);
+      margin-left: auto;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── DASHBOARD COLUMN ─── */
+    .dashboard-col {
+      background: var(--creme);
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 2rem 1.5rem;
+      overflow-y: auto;
+    }
+    .dashboard-header {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green-primary);
+      margin-bottom: 1.2rem;
+    }
+    .dashboard-panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 1.3rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .dashboard-panel h3 {
+      font-family: 'Cormorant', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 1rem;
     }
 
     /* Alignment matrix */
-    .alignment-matrix { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+    .alignment-matrix {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0.8rem;
+    }
     .alignment-matrix th {
       font-family: 'Karla', sans-serif;
-      font-size: 0.75rem; font-weight: 500;
-      text-transform: uppercase; letter-spacing: 0.08em;
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
       color: var(--grey-mid);
-      padding: 0.6rem 0.8rem;
+      padding: 0.35rem 0.4rem;
       text-align: center;
     }
-    .alignment-matrix th:first-child { text-align: left; min-width: 160px; }
+    .alignment-matrix th:first-child {
+      text-align: left;
+      min-width: 110px;
+    }
     .alignment-matrix td {
-      padding: 0.5rem 0.8rem;
+      padding: 0.35rem 0.4rem;
       text-align: center;
       border-top: 1px solid var(--border);
     }
     .alignment-matrix td:first-child {
-      font-family: 'Karla', sans-serif;
-      font-size: 0.85rem; font-weight: 500;
+      font-size: 0.75rem;
+      font-weight: 500;
       color: var(--dark);
       text-align: left;
     }
     .alignment-cell {
       display: inline-block;
-      width: 36px; height: 18px;
+      width: 26px;
+      height: 13px;
     }
     .alignment-cell.strong { background: var(--green-primary); }
     .alignment-cell.moderate { background: var(--green-primary); opacity: 0.5; }
     .alignment-cell.minimal { background: var(--green-primary); opacity: 0.15; }
     .matrix-legend {
-      display: flex; gap: 1.5rem; margin-bottom: 1rem;
-      font-size: 0.75rem; color: var(--grey-mid);
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.65rem;
+      color: var(--grey-mid);
       align-items: center;
     }
     .matrix-legend span {
-      display: flex; align-items: center; gap: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
     }
     .legend-swatch {
-      display: inline-block; width: 18px; height: 10px;
+      display: inline-block;
+      width: 12px;
+      height: 7px;
     }
     .matrix-insight {
       font-style: italic;
-      font-size: 0.85rem;
-      color: var(--grey-mid);
-      line-height: 1.6;
-    }
-
-    /* Programme health cards */
-    .programme-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      padding: 2rem;
-    }
-    .programme-card::before {
-      content: '';
-      display: block;
-      width: 24px; height: 3px;
-      background: var(--green-primary);
-      margin-bottom: 1rem;
-    }
-    .programme-card:nth-child(2)::before { background: var(--blue-primary); }
-    .programme-card:nth-child(3)::before { background: var(--yellow); }
-    .programme-card:nth-child(4)::before { background: var(--green-secondary); }
-    .programme-card h3 {
-      font-family: 'Cormorant', serif;
-      font-size: 1.1rem; font-weight: 500;
-      color: var(--dark);
-      margin-bottom: 1.2rem;
-    }
-    .programme-stats {
-      display: flex; gap: 1.5rem; flex-wrap: wrap;
-      margin-bottom: 1rem;
-    }
-    .programme-stat-num {
-      font-family: 'Karla', sans-serif;
-      font-size: 1.4rem; font-weight: 600;
-      color: var(--dark);
-      line-height: 1;
-    }
-    .programme-stat-label {
-      font-size: 0.68rem; font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--grey-mid);
-      margin-top: 0.2rem;
-    }
-    .status-indicator {
-      display: flex; align-items: center; gap: 0.5rem;
-      margin-bottom: 0.6rem;
-    }
-    .status-dot {
-      display: inline-block;
-      width: 8px; height: 8px;
-      border-radius: 50%;
-    }
-    .status-dot.green { background: var(--green-primary); }
-    .status-dot.yellow { background: var(--yellow); }
-    .status-dot.red { background: #c0392b; }
-    .status-label {
-      font-size: 0.78rem; font-weight: 500;
-      color: var(--dark);
-    }
-    .programme-note {
-      font-style: italic;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       color: var(--grey-mid);
       line-height: 1.5;
+      margin-top: 0.5rem;
     }
 
-    /* Paired bars */
-    .paired-bar-group { margin-bottom: 1.2rem; }
-    .paired-bar-label {
-      font-size: 0.8rem; font-weight: 500;
-      color: var(--dark);
-      margin-bottom: 0.4rem;
+    /* Dashboard menu (greyed items) */
+    .dashboard-menu {
+      margin-top: auto;
+      padding-top: 1rem;
     }
-    .paired-bar-row {
-      display: flex; align-items: center; gap: 0.6rem;
-      margin-bottom: 0.3rem;
-    }
-    .paired-bar-tag {
-      font-size: 0.68rem; font-weight: 500;
-      color: var(--grey-mid);
-      min-width: 90px;
-    }
-    .paired-bar-track {
-      flex: 1; height: 14px;
-      background: var(--creme);
-      overflow: hidden;
-    }
-    .paired-bar-fill {
-      height: 100%;
-      width: 0;
-      transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .paired-bar-fill.animated { width: var(--target-width); }
-    .paired-bar-val {
-      font-size: 0.75rem; font-weight: 500;
-      color: var(--grey-mid);
-      min-width: 35px;
-      text-align: right;
-    }
-    .paired-legend {
-      display: flex; gap: 1.5rem; margin-bottom: 1.5rem;
-      font-size: 0.72rem; color: var(--grey-mid);
-    }
-    .paired-legend span {
-      display: flex; align-items: center; gap: 0.4rem;
-    }
-    .paired-legend-swatch {
-      display: inline-block; width: 14px; height: 10px;
-    }
-
-    /* Volunteer stats */
-    .volunteer-stats {
-      display: flex; gap: 1.5rem; margin-top: 1.2rem;
-    }
-    .volunteer-stat { text-align: center; }
-    .volunteer-stat-num {
-      font-family: 'Karla', sans-serif;
-      font-size: 1.4rem; font-weight: 600;
-      color: var(--dark); line-height: 1;
-    }
-    .volunteer-stat-label {
-      font-size: 0.68rem; font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--grey-mid);
-      margin-top: 0.2rem;
-    }
-
-    /* Decision items */
-    .decision-list { list-style: none; }
-    .decision-item {
-      display: flex; align-items: flex-start; justify-content: space-between;
-      gap: 1rem;
-      padding: 1rem 0 1rem 1rem;
-      border-left: 3px solid var(--green-primary);
-      margin-bottom: 1rem;
-    }
-    .decision-item:nth-child(2) { border-left-color: var(--blue-primary); }
-    .decision-item:nth-child(3) { border-left-color: var(--yellow); }
-    .decision-item:nth-child(4) { border-left-color: var(--green-secondary); }
-    .decision-title {
-      font-family: 'Karla', sans-serif;
-      font-size: 0.9rem; font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 0.3rem;
-    }
-    .decision-context {
-      font-size: 0.85rem;
-      color: var(--grey-mid);
-      line-height: 1.5;
-    }
-    .decision-tag {
-      flex-shrink: 0;
-      padding: 0.3rem 0.7rem;
-      background: var(--creme);
-      color: var(--grey-dark);
-      font-size: 0.72rem;
-      font-weight: 500;
-      align-self: flex-start;
-      margin-top: 0.2rem;
-    }
-
-    /* ─── OPERATIONAL ANALYSIS ─── */
-    #analysis {
-      background: var(--white);
-    }
-    .ops-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-    }
-    .ops-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      padding: 2rem;
-    }
-    .ops-card::before {
-      content: '';
-      display: block;
-      width: 24px; height: 3px;
-      background: var(--green-primary);
-      margin-bottom: 1.2rem;
-    }
-    .ops-card:nth-child(2)::before { background: var(--blue-primary); }
-    .ops-card:nth-child(3)::before { background: var(--yellow); }
-    .ops-card .card-stat {
-      font-size: 0.72rem; font-weight: 500;
+    .dashboard-menu-title {
+      font-size: 0.65rem;
+      font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--green-primary);
-      margin-bottom: 0.8rem;
+      color: var(--grey-light);
+      margin-bottom: 0.5rem;
     }
-    .ops-card:nth-child(2) .card-stat { color: var(--blue-primary); }
-    .ops-card:nth-child(3) .card-stat { color: var(--yellow); }
-    .ops-card h3 {
-      font-family: 'Cormorant', serif;
-      font-size: 1.15rem; font-weight: 500;
-      color: var(--dark);
-      margin-bottom: 0.8rem;
-    }
-    .ops-card p { font-size: 0.9rem; color: var(--grey-mid); line-height: 1.7; }
-
-    /* ─── EXPERIENCE ─── */
-    #experience {
-      background: var(--creme);
-    }
-    .experience-content {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
-      align-items: start;
-    }
-    .experience-text p { margin-bottom: 1rem; color: var(--grey-dark); font-size: 0.95rem; }
-    .experience-text strong { color: var(--dark); }
-    .experience-aside {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--green-primary);
-      padding: 2rem;
-    }
-    .experience-aside h4 {
-      font-size: 0.78rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--dark); margin-bottom: 0.8rem;
-    }
-    .framework-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
-    .tag {
-      padding: 0.3rem 0.7rem;
-      background: var(--creme);
-      color: var(--grey-dark);
+    .menu-item {
+      padding: 0.45rem 0;
       font-size: 0.78rem;
-      font-weight: 400;
-    }
-
-    /* ─── 90 DAYS ─── */
-    #ninety-days {
-      background: var(--white);
-    }
-    .timeline-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-    }
-    .timeline-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      padding: 2rem;
-    }
-    .timeline-card::before {
-      content: '';
-      display: block;
-      width: 24px; height: 3px;
-      background: var(--green-primary);
-      margin-bottom: 1.2rem;
-    }
-    .timeline-card:nth-child(2)::before { background: var(--blue-primary); }
-    .timeline-card:nth-child(3)::before { background: var(--yellow); }
-    .phase-label {
-      font-size: 0.72rem; font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--green-primary);
-      margin-bottom: 0.6rem;
-    }
-    .timeline-card:nth-child(2) .phase-label { color: var(--blue-primary); }
-    .timeline-card:nth-child(3) .phase-label { color: var(--yellow); }
-    .timeline-card h3 {
-      font-family: 'Cormorant', serif;
-      font-size: 1.15rem; font-weight: 500;
-      color: var(--dark);
-      margin-bottom: 1rem;
-    }
-    .timeline-card ul {
-      list-style: none;
-    }
-    .timeline-card li {
-      padding: 0.4rem 0;
-      font-size: 0.88rem;
+      font-weight: 500;
       color: var(--grey-mid);
-      display: flex; align-items: flex-start; gap: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      border-bottom: 1px solid var(--border);
     }
-    .timeline-card li::before {
-      content: '';
-      display: block;
-      width: 4px; height: 4px;
-      background: var(--grey-light);
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item.active { color: var(--dark); }
+    .menu-item:not(.active) { opacity: 0.35; }
+    .menu-indicator {
+      width: 5px; height: 5px;
       border-radius: 50%;
-      margin-top: 0.55rem;
-      flex-shrink: 0;
     }
-    .caveat {
-      margin-top: 2rem;
-      font-size: 0.85rem;
+    .menu-item.active .menu-indicator { background: var(--green-primary); }
+    .menu-item:not(.active) .menu-indicator { background: var(--grey-light); }
+
+    .dashboard-source {
+      font-size: 0.65rem;
       color: var(--grey-light);
       font-style: italic;
-      max-width: 680px;
-    }
-
-    /* ─── CONTACT ─── */
-    .contact-bg {
-      background: var(--teal-dark);
-      color: var(--white);
-    }
-    .contact-inner {
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .contact-inner .section-label { color: var(--green-secondary); }
-    .contact-inner .section-title { color: var(--white); }
-    .contact-inner p { color: rgba(252,252,252,0.7); margin-bottom: 2rem; font-size: 1rem; }
-    .contact-buttons {
-      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
-    }
-    .contact-btn {
-      display: inline-block;
-      padding: 0.7rem 2rem;
-      border: 1px solid rgba(252,252,252,0.3);
-      color: var(--white);
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: 500;
-      font-size: 0.88rem;
-      transition: background 0.3s, border-color 0.3s;
-    }
-    .contact-btn:hover { background: rgba(252,252,252,0.1); border-color: rgba(252,252,252,0.5); }
-    .contact-details {
-      margin-top: 2rem;
-      font-size: 0.85rem;
-      color: rgba(252,252,252,0.4);
-    }
-
-    /* ─── FOOTER ─── */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.75rem;
-      color: var(--grey-light);
-      background: var(--white);
+      margin-top: 0.8rem;
     }
 
     /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .carousel-col { padding: 2rem 2.5rem 1rem; }
+      .slide h1 { font-size: 2.1rem; }
+      .slide h2 { font-size: 1.7rem; }
+    }
+
     @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .hero-text h1 { font-size: 2.2rem; }
-      .experience-content { grid-template-columns: 1fr; }
-      .stat-grid { grid-template-columns: repeat(2, 1fr); }
-      .dashboard-grid { grid-template-columns: 1fr; }
-      .ops-grid { grid-template-columns: 1fr; }
-      .timeline-grid { grid-template-columns: 1fr; }
-      .nav-links { gap: 1.2rem; }
+      body { height: auto; overflow-y: auto; overflow-x: hidden; }
+      .page {
+        height: auto;
+        grid-template-columns: 1fr;
+      }
+      .carousel-col {
+        min-height: 75vh;
+        padding: 2rem;
+      }
+      .carousel-wrap { min-height: 55vh; }
+      .dashboard-col { padding: 2rem; }
+      .slide h1 { font-size: 2rem; }
     }
 
     @media (max-width: 600px) {
-      .hero { min-height: auto; padding: 6rem 1.2rem 3rem; }
-      .hero-text h1 { font-size: 1.8rem; }
-      .hero-text p { font-size: 0.95rem; }
-      section { padding: 3rem 1.2rem; }
-      .section-title { font-size: 1.6rem; }
-      .hero-card { padding: 1.5rem; }
-      .stat-grid { grid-template-columns: 1fr 1fr; }
-      .stat-number { font-size: 1.6rem; }
+      .carousel-col { padding: 1.5rem; min-height: 70vh; }
+      .slide h1 { font-size: 1.7rem; }
+      .slide h2 { font-size: 1.5rem; }
+      .carousel-wrap { min-height: 50vh; }
+      .mini-timeline { flex-direction: column; gap: 0.6rem; }
+      .contact-links { flex-direction: column; }
+      .contact-link { text-align: center; }
 
-      /* Mobile menu */
       .menu-toggle { display: block; }
       .nav-links {
         display: none;
@@ -748,15 +503,8 @@
         gap: 2rem;
       }
       .nav-links.open { display: flex; }
-      .nav-links a { font-size: 1.2rem; color: var(--white); }
+      .nav-links a { font-size: 1.1rem; color: var(--white); }
     }
-
-    /* ─── ANIMATION ─── */
-    .fade-up {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
@@ -769,587 +517,253 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#dashboard">Operations dashboard</a></li>
-        <li><a href="#analysis">Operational analysis</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#ninety-days">90-day plan</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a data-slide="1">What I bring</a></li>
+        <li><a data-slide="2">How I think</a></li>
+        <li><a href="mailto:immyfeenan@gmail.com">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-text fade-up">
-        <h1>Catalyzing CCAI's strategic ambitions</h1>
-        <p>I know I am more of a wildcard candidate with more corporate sustainability programme management and operations experience. I want to show you what I'd bring to this role and express my enthusiasm for the work CCAI does.</p>
-        <a href="#contact" class="hero-cta">Let's talk</a>
+  <!-- PAGE -->
+  <main class="page">
+
+    <!-- LEFT: CAROUSEL -->
+    <div class="carousel-col">
+      <div class="carousel-wrap">
+
+        <!-- Slide 1: Enthusiasm & interest -->
+        <div class="slide active" data-index="0">
+          <div class="slide-label">Enthusiasm &amp; interest</div>
+          <h1>Catalyzing CCAI's<br>strategic ambitions</h1>
+          <p>I know I am more of a wildcard candidate with more corporate sustainability programme management and operations experience. I want to show you what I'd bring to this role and express my enthusiasm for the work CCAI does.</p>
+          <span class="slide-role">Director of Operations &amp; Projects — Climate Change AI</span>
+        </div>
+
+        <!-- Slide 2: What I bring -->
+        <div class="slide" data-index="1">
+          <div class="slide-label">What I bring</div>
+          <h2>What I bring to this</h2>
+          <div class="experience-items">
+            <div class="experience-item">
+              <div class="experience-item-title">Volunteer CRM &amp; coordination systems</div>
+              <div class="experience-item-desc">I developed a policy and advocacy campaigns hub for IKEA that empowered their country teams to develop locally relevant advocacy campaigns.</div>
+            </div>
+            <div class="experience-item">
+              <div class="experience-item-title">Programmatic impact dashboards</div>
+              <div class="experience-item-desc">I have developed sustainability and social impact reporting frameworks for corporate clients that look at outputs, outcomes, and impact.</div>
+            </div>
+            <div class="experience-item">
+              <div class="experience-item-title">Decision science for resource allocation</div>
+              <div class="experience-item-desc">My current independent research is integrating decision science (AHP-TOPSIS) into the materiality assessment process for corporate sustainability.</div>
+            </div>
+            <div class="experience-item">
+              <div class="experience-item-title">Independent, remote, self-directed</div>
+              <div class="experience-item-desc">I've worked independently across UK, European, and South African contexts for years.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: How I think -->
+        <div class="slide" data-index="2">
+          <div class="slide-label">How I think</div>
+          <h2>Three areas of initial focus</h2>
+          <p style="font-size: 0.82rem; color: var(--grey-mid); margin-bottom: 1.2rem; max-width: 460px;">Based on CCAI's public work, team structure, and the JD for this role.</p>
+          <div class="focus-items">
+            <div class="focus-item">
+              <div class="focus-stat">50+ volunteers · 5 continents</div>
+              <div class="focus-title">Volunteer coordination infrastructure</div>
+              <div class="focus-desc">A well-designed volunteer CRM, onboarding and task / contribution tracking system would reduce contributor burden as well as allow smoother tracking of activities for CCAI staff.</div>
+            </div>
+            <div class="focus-item">
+              <div class="focus-stat">4 programme streams · 23 projects</div>
+              <div class="focus-title">Programmatic impact tracking</div>
+              <div class="focus-desc">Tracking the different impact metrics and mapping those to the strategic direction of the organization is essential to improve decision-making around resource allocation.</div>
+            </div>
+            <div class="focus-item">
+              <div class="focus-stat">501(c)(3) since 2021</div>
+              <div class="focus-title">Back-end infrastructure for scale</div>
+              <div class="focus-desc">Reviewing the legal and financial structure and processes. Ensuring the foundational elements of operations are set up in a way that isn't creating friction for staff or core team.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: The throughline -->
+        <div class="slide" data-index="3">
+          <div class="slide-label">The throughline</div>
+          <h2>If this brief is useful, I'd love to continue the conversation.</h2>
+          <p>I'm genuinely excited about what CCAI is building and confident I can help it run better. I'd welcome the chance to discuss these ideas further.</p>
+          <div class="mini-timeline">
+            <div class="mini-phase">
+              <div class="mini-phase-bar"></div>
+              <div class="mini-phase-label">Days 1–30</div>
+              <div class="mini-phase-name">Learn</div>
+            </div>
+            <div class="mini-phase">
+              <div class="mini-phase-bar"></div>
+              <div class="mini-phase-label">Days 31–60</div>
+              <div class="mini-phase-name">Design</div>
+            </div>
+            <div class="mini-phase">
+              <div class="mini-phase-bar"></div>
+              <div class="mini-phase-label">Days 61–90</div>
+              <div class="mini-phase-name">Build</div>
+            </div>
+          </div>
+          <div class="contact-links">
+            <a href="https://imogenfeenan.com" class="contact-link">imogenfeenan.com</a>
+            <a href="mailto:immyfeenan@gmail.com" class="contact-link">Email me</a>
+          </div>
+          <div class="contact-location">Cape Town, South Africa (GMT+2) · Available for remote work globally</div>
+        </div>
+
       </div>
-      <div class="hero-card fade-up" style="transition-delay: 0.15s;">
-        <h3>What this site is</h3>
-        <ul class="deliverable-list">
-          <li>A bespoke application for the Director of Operations &amp; Projects role at Climate Change AI. <span class="li-emphasis">A demonstration of commitment and enthusiasm</span></li>
-          <li>A live dashboard built from CCAI's public data. <span class="li-emphasis">A demonstration of the kind of impact reporting the role requires</span></li>
-          <li>An operational diagnosis. <span class="li-emphasis">Some informed thought-starters of where to focus first</span></li>
-          <li>A first 90 days sketch showing how I'd approach the role</li>
-        </ul>
+
+      <!-- Controls -->
+      <div class="carousel-controls">
+        <button class="carousel-arrow carousel-prev" aria-label="Previous slide" disabled>&#8592;</button>
+        <div class="carousel-dots">
+          <button class="carousel-dot active" data-dot="0" aria-label="Slide 1"></button>
+          <button class="carousel-dot" data-dot="1" aria-label="Slide 2"></button>
+          <button class="carousel-dot" data-dot="2" aria-label="Slide 3"></button>
+          <button class="carousel-dot" data-dot="3" aria-label="Slide 4"></button>
+        </div>
+        <button class="carousel-arrow carousel-next" aria-label="Next slide">&#8594;</button>
+        <span class="carousel-counter">1 / 4</span>
       </div>
     </div>
-  </section>
 
-  <!-- STRATEGIC OPERATIONS DASHBOARD -->
-  <section id="dashboard">
-    <div class="section-inner">
-      <div class="section-label fade-up">Strategic operations</div>
-      <h2 class="section-title fade-up">Portfolio health &amp; strategic alignment</h2>
-      <p class="section-intro fade-up">A prototype of the operational reporting infrastructure this role would own. This mock dashboard connects CCAI's programme activity to strategic goals — turning data into decisions, not just metrics.</p>
+    <!-- RIGHT: DASHBOARD -->
+    <div class="dashboard-col">
+      <div class="dashboard-header">Strategic operations dashboard</div>
 
-      <!-- Row 1: Strategic alignment scorecard -->
-      <div class="dashboard-card fade-up" style="margin-bottom: 1.5rem;">
+      <div class="dashboard-panel">
         <h3>Programme alignment to strategic goals</h3>
         <div class="matrix-legend">
           <span><span class="legend-swatch" style="background: var(--green-primary);"></span> Strong</span>
           <span><span class="legend-swatch" style="background: var(--green-primary); opacity: 0.5;"></span> Moderate</span>
           <span><span class="legend-swatch" style="background: var(--green-primary); opacity: 0.15;"></span> Minimal</span>
         </div>
-        <div style="overflow-x: auto;">
-          <table class="alignment-matrix">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Grants</th>
-                <th>Events</th>
-                <th>Summer School</th>
-                <th>Policy</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Expertise</td>
-                <td><span class="alignment-cell strong"></span></td>
-                <td><span class="alignment-cell strong"></span></td>
-                <td><span class="alignment-cell strong"></span></td>
-                <td><span class="alignment-cell moderate"></span></td>
-              </tr>
-              <tr>
-                <td>Education</td>
-                <td><span class="alignment-cell moderate"></span></td>
-                <td><span class="alignment-cell moderate"></span></td>
-                <td><span class="alignment-cell strong"></span></td>
-                <td><span class="alignment-cell strong"></span></td>
-              </tr>
-              <tr>
-                <td>Coordination</td>
-                <td><span class="alignment-cell moderate"></span></td>
-                <td><span class="alignment-cell strong"></span></td>
-                <td><span class="alignment-cell moderate"></span></td>
-                <td><span class="alignment-cell strong"></span></td>
-              </tr>
-              <tr>
-                <td>Research-to-deployment</td>
-                <td><span class="alignment-cell strong"></span></td>
-                <td><span class="alignment-cell moderate"></span></td>
-                <td><span class="alignment-cell minimal"></span></td>
-                <td><span class="alignment-cell strong"></span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <table class="alignment-matrix">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Grants</th>
+              <th>Events</th>
+              <th>Summer School</th>
+              <th>Policy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Expertise</td>
+              <td><span class="alignment-cell strong"></span></td>
+              <td><span class="alignment-cell strong"></span></td>
+              <td><span class="alignment-cell strong"></span></td>
+              <td><span class="alignment-cell moderate"></span></td>
+            </tr>
+            <tr>
+              <td>Education</td>
+              <td><span class="alignment-cell moderate"></span></td>
+              <td><span class="alignment-cell moderate"></span></td>
+              <td><span class="alignment-cell strong"></span></td>
+              <td><span class="alignment-cell strong"></span></td>
+            </tr>
+            <tr>
+              <td>Coordination</td>
+              <td><span class="alignment-cell moderate"></span></td>
+              <td><span class="alignment-cell strong"></span></td>
+              <td><span class="alignment-cell moderate"></span></td>
+              <td><span class="alignment-cell strong"></span></td>
+            </tr>
+            <tr>
+              <td>Research-to-deployment</td>
+              <td><span class="alignment-cell strong"></span></td>
+              <td><span class="alignment-cell moderate"></span></td>
+              <td><span class="alignment-cell minimal"></span></td>
+              <td><span class="alignment-cell strong"></span></td>
+            </tr>
+          </tbody>
+        </table>
         <p class="matrix-insight">Observation: Research-to-deployment alignment is concentrated in Grants and Policy. Events and Summer School may be under-leveraged for bridging research into practice.</p>
       </div>
 
-      <!-- Row 2: Programme portfolio health (2x2 grid) -->
-      <div class="dashboard-grid fade-up">
-        <div class="programme-card">
-          <h3>Grants programme</h3>
-          <div class="programme-stats">
-            <div>
-              <div class="programme-stat-num stat-number" data-target="23">0</div>
-              <div class="programme-stat-label">Funded projects</div>
-            </div>
-            <div>
-              <div class="programme-stat-num">$1.4M</div>
-              <div class="programme-stat-label">Deployed</div>
-            </div>
-            <div>
-              <div class="programme-stat-num stat-number" data-target="62">0</div>
-              <div class="programme-stat-label">Institutions</div>
-            </div>
-          </div>
-          <div class="status-indicator">
-            <span class="status-dot green"></span>
-            <span class="status-label">On track</span>
-          </div>
-          <p class="programme-note">Pipeline healthy. Next decision: Q3 call scope and regional targeting.</p>
+      <div class="dashboard-menu">
+        <div class="dashboard-menu-title">Dashboard views</div>
+        <div class="menu-item active">
+          <span class="menu-indicator"></span> Programme alignment
         </div>
-        <div class="programme-card">
-          <h3>Events &amp; workshops</h3>
-          <div class="programme-stats">
-            <div>
-              <div class="programme-stat-num stat-number" data-target="6">0</div>
-              <div class="programme-stat-label">NeurIPS workshops</div>
-            </div>
-            <div>
-              <div class="programme-stat-num">4/yr</div>
-              <div class="programme-stat-label">Conferences</div>
-            </div>
-            <div>
-              <div class="programme-stat-num">~2,000</div>
-              <div class="programme-stat-label">Attendees</div>
-            </div>
-          </div>
-          <div class="status-indicator">
-            <span class="status-dot yellow"></span>
-            <span class="status-label">Monitor</span>
-          </div>
-          <p class="programme-note">High delivery load relative to staff capacity. Volunteer coordination is the bottleneck.</p>
+        <div class="menu-item">
+          <span class="menu-indicator"></span> Programme health
         </div>
-        <div class="programme-card">
-          <h3>Summer school</h3>
-          <div class="programme-stats">
-            <div>
-              <div class="programme-stat-num stat-number" data-target="3">0</div>
-              <div class="programme-stat-label">Cohorts delivered</div>
-            </div>
-            <div>
-              <div class="programme-stat-num">160+</div>
-              <div class="programme-stat-label">Countries reached</div>
-            </div>
-            <div>
-              <div class="programme-stat-num">Mixed</div>
-              <div class="programme-stat-label">Format</div>
-            </div>
-          </div>
-          <div class="status-indicator">
-            <span class="status-dot green"></span>
-            <span class="status-label">On track</span>
-          </div>
-          <p class="programme-note">2024 hybrid model is sustainable. Key question: should 2025 scale virtual or deepen in-person?</p>
+        <div class="menu-item">
+          <span class="menu-indicator"></span> Staff &amp; volunteer capacity
         </div>
-        <div class="programme-card">
-          <h3>Policy &amp; reports</h3>
-          <div class="programme-stats">
-            <div>
-              <div class="programme-stat-num stat-number" data-target="3">0</div>
-              <div class="programme-stat-label">Major reports</div>
-            </div>
-            <div>
-              <div class="programme-stat-num">IPCC</div>
-              <div class="programme-stat-label">Engagement</div>
-            </div>
-            <div>
-              <div class="programme-stat-num">COP</div>
-              <div class="programme-stat-label">Presence</div>
-            </div>
-          </div>
-          <div class="status-indicator">
-            <span class="status-dot yellow"></span>
-            <span class="status-label">Monitor</span>
-          </div>
-          <p class="programme-note">Impact is high but hard to measure. Needs an attribution framework for policy influence.</p>
+        <div class="menu-item">
+          <span class="menu-indicator"></span> Budget vs. strategic weight
+        </div>
+        <div class="menu-item">
+          <span class="menu-indicator"></span> Leadership decisions
         </div>
       </div>
 
-      <!-- Row 3: Resource & capacity view (2-col grid) -->
-      <div class="dashboard-grid fade-up" style="margin-top: 1.5rem;">
-        <!-- Card A: Staff & volunteer capacity -->
-        <div class="dashboard-card">
-          <h3>Staff &amp; volunteer capacity</h3>
-          <p style="font-size: 0.78rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--grey-mid); margin-bottom: 0.8rem;">Staff time allocation</p>
-          <div class="bar-section">
-            <div class="bar-row">
-              <span class="bar-label">Grants</span>
-              <div class="bar-track">
-                <div class="bar-fill green" style="--target-width: 30%;"></div>
-              </div>
-              <span class="bar-value">30%</span>
-            </div>
-            <div class="bar-row">
-              <span class="bar-label">Events</span>
-              <div class="bar-track">
-                <div class="bar-fill green" style="--target-width: 25%;"></div>
-              </div>
-              <span class="bar-value">25%</span>
-            </div>
-            <div class="bar-row">
-              <span class="bar-label">Summer Sch.</span>
-              <div class="bar-track">
-                <div class="bar-fill green" style="--target-width: 20%;"></div>
-              </div>
-              <span class="bar-value">20%</span>
-            </div>
-            <div class="bar-row">
-              <span class="bar-label">Policy</span>
-              <div class="bar-track">
-                <div class="bar-fill green" style="--target-width: 15%;"></div>
-              </div>
-              <span class="bar-value">15%</span>
-            </div>
-            <div class="bar-row">
-              <span class="bar-label">Ops/Admin</span>
-              <div class="bar-track">
-                <div class="bar-fill green" style="--target-width: 10%;"></div>
-              </div>
-              <span class="bar-value">10%</span>
-            </div>
-          </div>
-          <p style="font-size: 0.78rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--grey-mid); margin-top: 1.2rem; margin-bottom: 0.6rem;">Volunteer engagement</p>
-          <div class="volunteer-stats">
-            <div class="volunteer-stat">
-              <div class="volunteer-stat-num stat-number" data-target="35">0</div>
-              <div class="volunteer-stat-label">Active</div>
-            </div>
-            <div class="volunteer-stat">
-              <div class="volunteer-stat-num stat-number" data-target="12">0</div>
-              <div class="volunteer-stat-label">Occasional</div>
-            </div>
-            <div class="volunteer-stat">
-              <div class="volunteer-stat-num stat-number" data-target="8">0</div>
-              <div class="volunteer-stat-label">Dormant</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card B: Budget allocation vs. strategic weight -->
-        <div class="dashboard-card">
-          <h3>Budget allocation vs. strategic weight</h3>
-          <div class="paired-legend">
-            <span><span class="paired-legend-swatch" style="background: var(--green-primary);"></span> Budget %</span>
-            <span><span class="paired-legend-swatch" style="background: var(--blue-primary);"></span> Strategic weight %</span>
-          </div>
-          <div class="paired-bar-group">
-            <div class="paired-bar-label">Expertise</div>
-            <div class="paired-bar-row">
-              <span class="paired-bar-tag">Budget</span>
-              <div class="paired-bar-track">
-                <div class="paired-bar-fill" style="--target-width: 30%; background: var(--green-primary);"></div>
-              </div>
-              <span class="paired-bar-val">30%</span>
-            </div>
-            <div class="paired-bar-row">
-              <span class="paired-bar-tag">Strategic</span>
-              <div class="paired-bar-track">
-                <div class="paired-bar-fill" style="--target-width: 25%; background: var(--blue-primary);"></div>
-              </div>
-              <span class="paired-bar-val">25%</span>
-            </div>
-          </div>
-          <div class="paired-bar-group">
-            <div class="paired-bar-label">Education</div>
-            <div class="paired-bar-row">
-              <span class="paired-bar-tag">Budget</span>
-              <div class="paired-bar-track">
-                <div class="paired-bar-fill" style="--target-width: 25%; background: var(--green-primary);"></div>
-              </div>
-              <span class="paired-bar-val">25%</span>
-            </div>
-            <div class="paired-bar-row">
-              <span class="paired-bar-tag">Strategic</span>
-              <div class="paired-bar-track">
-                <div class="paired-bar-fill" style="--target-width: 25%; background: var(--blue-primary);"></div>
-              </div>
-              <span class="paired-bar-val">25%</span>
-            </div>
-          </div>
-          <div class="paired-bar-group">
-            <div class="paired-bar-label">Coordination</div>
-            <div class="paired-bar-row">
-              <span class="paired-bar-tag">Budget</span>
-              <div class="paired-bar-track">
-                <div class="paired-bar-fill" style="--target-width: 15%; background: var(--green-primary);"></div>
-              </div>
-              <span class="paired-bar-val">15%</span>
-            </div>
-            <div class="paired-bar-row">
-              <span class="paired-bar-tag">Strategic</span>
-              <div class="paired-bar-track">
-                <div class="paired-bar-fill" style="--target-width: 25%; background: var(--blue-primary);"></div>
-              </div>
-              <span class="paired-bar-val">25%</span>
-            </div>
-          </div>
-          <div class="paired-bar-group" style="margin-bottom: 0;">
-            <div class="paired-bar-label">Research-to-deployment</div>
-            <div class="paired-bar-row">
-              <span class="paired-bar-tag">Budget</span>
-              <div class="paired-bar-track">
-                <div class="paired-bar-fill" style="--target-width: 30%; background: var(--green-primary);"></div>
-              </div>
-              <span class="paired-bar-val">30%</span>
-            </div>
-            <div class="paired-bar-row">
-              <span class="paired-bar-tag">Strategic</span>
-              <div class="paired-bar-track">
-                <div class="paired-bar-fill" style="--target-width: 25%; background: var(--blue-primary);"></div>
-              </div>
-              <span class="paired-bar-val">25%</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 4: Decisions needed -->
-      <div class="dashboard-card fade-up" style="margin-top: 1.5rem;">
-        <h3>Leadership decisions this quarter</h3>
-        <ul class="decision-list">
-          <li class="decision-item">
-            <div>
-              <div class="decision-title">Scale 2025 Summer School virtual track or invest in regional in-person cohorts?</div>
-              <div class="decision-context">Virtual reach is 100x in-person, but completion rates and network effects differ significantly.</div>
-            </div>
-            <span class="decision-tag">Education</span>
-          </li>
-          <li class="decision-item">
-            <div>
-              <div class="decision-title">Expand grants programme geographic scope to underrepresented regions?</div>
-              <div class="decision-context">22 countries currently funded. Africa and Southeast Asia have high climate-AI need but low application volume.</div>
-            </div>
-            <span class="decision-tag">Grants</span>
-          </li>
-          <li class="decision-item">
-            <div>
-              <div class="decision-title">Formalise volunteer coordination role before next NeurIPS cycle?</div>
-              <div class="decision-context">Current model relies on informal coordination. Risk of volunteer burnout and institutional knowledge loss.</div>
-            </div>
-            <span class="decision-tag">Operations</span>
-          </li>
-          <li class="decision-item">
-            <div>
-              <div class="decision-title">Develop policy impact attribution framework for funder reporting?</div>
-              <div class="decision-context">Policy stream has qualitative evidence of influence but no systematic way to report it.</div>
-            </div>
-            <span class="decision-tag">Policy</span>
-          </li>
-        </ul>
-      </div>
-
-      <p class="dashboard-source fade-up">Prototype dashboard with illustrative data. A working version would connect to CCAI's project management, financial, and CRM systems. Data is representative, not actual.</p>
+      <p class="dashboard-source">Prototype dashboard with illustrative data. A working version would connect to CCAI's project management, financial, and CRM systems.</p>
     </div>
-  </section>
 
-  <!-- OPERATIONAL ANALYSIS -->
-  <section id="analysis">
-    <div class="section-inner">
-      <div class="section-label fade-up">Operational analysis</div>
-      <h2 class="section-title fade-up">Three areas of initial focus</h2>
-      <p class="section-intro fade-up">Based on CCAI's public work, team structure, and the JD for this role.</p>
-      <div class="ops-grid">
-        <div class="ops-card fade-up">
-          <div class="card-stat">50+ volunteers · 5 continents</div>
-          <h3>Volunteer coordination infrastructure</h3>
-          <p>A well-designed volunteer CRM, onboarding and task / contribution tracking system would reduce contributor burden as well as allow smoother tracking of activities for CCAI staff.</p>
-        </div>
-        <div class="ops-card fade-up" style="transition-delay: 0.1s;">
-          <div class="card-stat">4 programme streams · 23 projects</div>
-          <h3>Programmatic impact tracking</h3>
-          <p>Tracking the different impact metrics from grants, events, summer school and policy work and mapping those to the strategic direction of the organization is essential to improve decision-making around resource allocation. CCAI needs to be doing more of the most effective work so a reporting framework and dashboard of this kind would support that. It also connects to funder reporting, board-level strategic insight, and public-facing transparency.</p>
-        </div>
-        <div class="ops-card fade-up" style="transition-delay: 0.2s;">
-          <div class="card-stat">501(c)(3) since 2021</div>
-          <h3>Back-end infrastructure for scale</h3>
-          <p>Reviewing the legal and financial structure and processes. Ensuring the foundational elements of operations are set up in a way that isn't creating friction for staff or core team. Bringing fresh eyes onto a legacy set-up can be helpful but this is as much a listening and learning focus area as an action one.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- RELEVANT EXPERIENCE -->
-  <section id="experience">
-    <div class="section-inner">
-      <div class="section-label fade-up">Relevant experience</div>
-      <h2 class="section-title fade-up">What I bring to this</h2>
-      <p class="section-intro fade-up">Mapping of my experience to the three operational opportunities above.</p>
-      <div class="experience-content">
-        <div class="experience-text fade-up">
-          <p><strong>Volunteer CRM.</strong> I developed a policy and advocacy campaigns hub for IKEA that empowered their country teams to develop locally relevant advocacy campaigns. This was a SharePoint workflow that took teams from education of the global strategy, inspiration, checkbox workflows and development templates, to reporting guidelines. I appreciate the content is not relevant but I spoke to teams, heard what they needed and what would make their work easier and better, and developed a system in response to that.</p>
-          <p><strong>Programmatic impact dashboard.</strong> I have developed sustainability and social impact reporting frameworks for corporate clients that look at outputs, outcomes, and impact. I have created reporting dashboards for every program at Economist Impact to demonstrate performance and provide the insight for recommendations for future work. I have the knowledge, expertise, and experience to turn metrics into tangible actions.</p>
-          <p><strong>Always thinking about how to make good decisions.</strong> My current independent research is integrating decision science (AHP-TOPSIS) into the materiality assessment process for corporate sustainability. It is currently a process that relies too much on subjectivity and doesn't help organizations make decisions for sustainability. It is with this mind and skill-set that I would support CCAI in operational decision-making.</p>
-          <p><strong>Independent, remote, self-directed.</strong> I've worked independently across UK, European, and South African contexts for years. I'm used to operating autonomously in distributed teams, flagging issues early, and building my own structure. CCAI's remote-first, globally distributed model is how I already work.</p>
-        </div>
-        <div class="experience-aside fade-up" style="transition-delay: 0.1s;">
-          <h4>Programme delivery</h4>
-          <div class="framework-tags">
-            <span class="tag">Multi-stakeholder coordination</span>
-            <span class="tag">Budget management</span>
-            <span class="tag">Cross-functional teams</span>
-            <span class="tag">Global programmes</span>
-          </div>
-          <h4>Research &amp; analysis</h4>
-          <div class="framework-tags">
-            <span class="tag">Evidence synthesis</span>
-            <span class="tag">Policy research</span>
-            <span class="tag">Data analysis</span>
-            <span class="tag">Sustainability frameworks</span>
-          </div>
-          <h4>Operations</h4>
-          <div class="framework-tags">
-            <span class="tag">Process design</span>
-            <span class="tag">Systems thinking</span>
-            <span class="tag">Volunteer coordination</span>
-            <span class="tag">Reporting infrastructure</span>
-          </div>
-          <h4>Domain expertise</h4>
-          <div class="framework-tags" style="margin-bottom: 0;">
-            <span class="tag">AI &amp; climate intersection</span>
-            <span class="tag">Scope 3 estimation</span>
-            <span class="tag">ESG reporting</span>
-            <span class="tag">CSRD / ISSB</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FIRST 90 DAYS -->
-  <section id="ninety-days">
-    <div class="section-inner">
-      <div class="section-label fade-up">First 90 days</div>
-      <h2 class="section-title fade-up">How I'd approach the role</h2>
-      <p class="section-intro fade-up">A sketch based on public information. The actual plan would be co-developed with the team in the first week.</p>
-      <div class="timeline-grid">
-        <div class="timeline-card fade-up">
-          <div class="phase-label">Days 1–30</div>
-          <h3>Learn</h3>
-          <ul>
-            <li>Deep listening with staff and core volunteers across all time zones</li>
-            <li>Audit existing processes, tools, documentation, and communication channels</li>
-            <li>Map what exists vs. what the JD needs to build — identify the real gaps, not the assumed ones</li>
-            <li>Understand funder reporting requirements and current compliance state</li>
-            <li>Identify 2–3 quick wins that build trust without creating disruption</li>
-          </ul>
-        </div>
-        <div class="timeline-card fade-up" style="transition-delay: 0.1s;">
-          <div class="phase-label">Days 31–60</div>
-          <h3>Design</h3>
-          <ul>
-            <li>Prioritise the 2–3 operational gaps with highest leverage</li>
-            <li>Propose CRM architecture for volunteer coordination and onboarding</li>
-            <li>Design impact tracking framework across programme streams</li>
-            <li>Draft standardised templates for grants administration and reporting</li>
-            <li>Present recommendations to the Executive Director with clear trade-offs</li>
-          </ul>
-        </div>
-        <div class="timeline-card fade-up" style="transition-delay: 0.2s;">
-          <div class="phase-label">Days 61–90</div>
-          <h3>Build</h3>
-          <ul>
-            <li>First operational system live — CRM pilot or reporting dashboard</li>
-            <li>Volunteer onboarding process documented and tested</li>
-            <li>Begin back-end infrastructure review (financial controls, procurement, contracts)</li>
-            <li>Establish regular coordination cadence with volunteer teams</li>
-            <li>Deliver first impact report to demonstrate the new framework</li>
-          </ul>
-        </div>
-      </div>
-      <p class="caveat fade-up">This is a sketch based on public information. The actual plan would be co-developed with the team in the first week — the best operational plans come from listening first, not arriving with answers.</p>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="contact-bg">
-    <div class="section-inner contact-inner">
-      <div class="section-label fade-up">Get in touch</div>
-      <h2 class="section-title fade-up">If this brief is useful, I'd love to continue the conversation.</h2>
-      <p class="fade-up">I'm genuinely excited about what CCAI is building and confident I can help it run better. I'd welcome the chance to discuss these ideas further.</p>
-      <div class="contact-buttons fade-up">
-        <a href="https://imogenfeenan.com" class="contact-btn">imogenfeenan.com</a>
-        <a href="mailto:immyfeenan@gmail.com" class="contact-btn">Email me</a>
-      </div>
-      <div class="contact-details fade-up">
-        Cape Town, South Africa (GMT+2) · Available for remote work globally
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2026 Imogen Feenan. All rights reserved.</p>
-  </footer>
+  </main>
 
   <script>
-    // ─── NAV SCROLL ───
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
+    // ─── CAROUSEL ───
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+    const counter = document.querySelector('.carousel-counter');
+    let current = 0;
+
+    function goToSlide(n) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = n;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      counter.textContent = (current + 1) + ' / ' + slides.length;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slides.length - 1;
+    }
+
+    prevBtn.addEventListener('click', function() {
+      if (current > 0) goToSlide(current - 1);
+    });
+    nextBtn.addEventListener('click', function() {
+      if (current < slides.length - 1) goToSlide(current + 1);
+    });
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function() {
+        goToSlide(parseInt(dot.dataset.dot));
+      });
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft' && current > 0) goToSlide(current - 1);
+      if (e.key === 'ArrowRight' && current < slides.length - 1) goToSlide(current + 1);
+    });
+
+    // ─── NAV SLIDE LINKS ───
+    document.querySelectorAll('[data-slide]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        goToSlide(parseInt(link.dataset.slide));
+        // Close mobile menu if open
+        document.getElementById('menuToggle').classList.remove('active');
+        document.getElementById('navLinks').classList.remove('open');
+      });
     });
 
     // ─── MOBILE MENU ───
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    menuToggle.addEventListener('click', () => {
+    var menuToggle = document.getElementById('menuToggle');
+    var navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', function() {
       menuToggle.classList.toggle('active');
       navLinks.classList.toggle('open');
-    });
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        menuToggle.classList.remove('active');
-        navLinks.classList.remove('open');
-      });
-    });
-
-    // ─── FADE-UP OBSERVER ───
-    const fadeObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
-
-    // ─── STAT NUMBER ANIMATION ───
-    function animateStatNumber(el) {
-      const target = parseFloat(el.dataset.target);
-      const prefix = el.dataset.prefix || '';
-      const suffix = el.dataset.suffix || '';
-      const decimals = parseInt(el.dataset.decimals) || 0;
-      const duration = 1500;
-      const start = performance.now();
-
-      function tick(now) {
-        const t = Math.min((now - start) / duration, 1);
-        const ease = 1 - Math.pow(1 - t, 3);
-        const val = ease * target;
-        if (decimals > 0) {
-          el.textContent = prefix + val.toFixed(decimals) + suffix;
-        } else {
-          el.textContent = prefix + Math.round(val).toLocaleString() + suffix;
-        }
-        if (t < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    }
-
-    const statObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.stat-number[data-target]').forEach(animateStatNumber);
-          statObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll('.dashboard-grid, .dashboard-card').forEach(el => {
-      if (el.querySelector('.stat-number[data-target]')) {
-        statObserver.observe(el);
-      }
-    });
-
-    // ─── BAR FILL ANIMATION ───
-    const barObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.bar-fill, .paired-bar-fill').forEach(bar => {
-            bar.classList.add('animated');
-          });
-          barObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll('.dashboard-card').forEach(card => {
-      barObserver.observe(card);
     });
   </script>
 </body>
