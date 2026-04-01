@@ -91,19 +91,18 @@
     .page {
       height: calc(100vh - 56px);
       margin-top: 56px;
-      display: grid;
-      grid-template-columns: 53% 47%;
-    }
-
-    /* ─── CAROUSEL COLUMN ─── */
-    .carousel-col {
       display: flex;
       flex-direction: column;
-      padding: 2.5rem 3.5rem 1.5rem;
+      align-items: center;
+      padding: 0 2rem;
     }
+
+    /* ─── CAROUSEL ─── */
     .carousel-wrap {
       flex: 1;
       position: relative;
+      width: 100%;
+      max-width: 1100px;
     }
     .slide {
       position: absolute;
@@ -111,6 +110,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      padding: 1rem 0;
+      overflow-y: auto;
       opacity: 0;
       transition: opacity 0.45s ease;
       pointer-events: none;
@@ -125,33 +126,37 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--green-primary);
-      margin-bottom: 1rem;
+      margin-bottom: 0.6rem;
     }
+
+    /* ─── SLIDE 1: HERO ─── */
     .slide h1 {
       font-family: 'Cormorant', serif;
-      font-size: 2.5rem;
+      font-size: 2.3rem;
       font-weight: 500;
       color: var(--dark);
       line-height: 1.15;
-      margin-bottom: 1.3rem;
+      margin-bottom: 1rem;
+      max-width: 580px;
     }
     .slide h2 {
       font-family: 'Cormorant', serif;
-      font-size: 1.9rem;
+      font-size: 1.7rem;
       font-weight: 500;
       color: var(--dark);
       line-height: 1.2;
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.8rem;
+      max-width: 580px;
     }
     .slide > p {
       font-size: 0.92rem;
       color: var(--grey-dark);
       line-height: 1.8;
-      max-width: 480px;
+      max-width: 520px;
     }
     .slide-role {
       display: inline-block;
-      margin-top: 1.5rem;
+      margin-top: 1rem;
       font-size: 0.75rem;
       font-weight: 500;
       letter-spacing: 0.06em;
@@ -160,12 +165,14 @@
       border: 1px solid var(--border);
     }
 
-    /* Experience items (slide 2) */
+    /* ─── SLIDE 2: EXPERIENCE ITEMS ─── */
     .experience-items {
-      max-width: 500px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem 2rem;
+      max-width: 820px;
     }
     .experience-item {
-      margin-bottom: 0.9rem;
       padding-left: 1rem;
       border-left: 2px solid var(--green-primary);
     }
@@ -174,23 +181,147 @@
     .experience-item:nth-child(4) { border-left-color: var(--green-secondary); }
     .experience-item-title {
       font-family: 'Cormorant', serif;
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 500;
       color: var(--dark);
-      margin-bottom: 0.15rem;
+      margin-bottom: 0.1rem;
     }
     .experience-item-desc {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--grey-mid);
       line-height: 1.5;
     }
 
-    /* Focus items (slide 3) */
+    /* ─── SLIDE 3: DASHBOARD ─── */
+    .dashboard-slide-inner {
+      display: grid;
+      grid-template-columns: 1fr 170px;
+      gap: 1.5rem;
+      align-items: start;
+      max-width: 850px;
+    }
+    .dashboard-panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 1.3rem;
+    }
+    .dashboard-panel h3 {
+      font-family: 'Cormorant', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+    .alignment-matrix {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0.8rem;
+    }
+    .alignment-matrix th {
+      font-family: 'Karla', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--grey-mid);
+      padding: 0.35rem 0.5rem;
+      text-align: center;
+    }
+    .alignment-matrix th:first-child {
+      text-align: left;
+      min-width: 120px;
+    }
+    .alignment-matrix td {
+      padding: 0.35rem 0.5rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .alignment-matrix td:first-child {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--dark);
+      text-align: left;
+    }
+    .alignment-cell {
+      display: inline-block;
+      width: 28px;
+      height: 14px;
+    }
+    .alignment-cell.strong { background: var(--green-primary); }
+    .alignment-cell.moderate { background: var(--green-primary); opacity: 0.5; }
+    .alignment-cell.minimal { background: var(--green-primary); opacity: 0.15; }
+    .matrix-legend {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.65rem;
+      color: var(--grey-mid);
+      align-items: center;
+    }
+    .matrix-legend span {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .legend-swatch {
+      display: inline-block;
+      width: 14px;
+      height: 8px;
+    }
+    .matrix-insight {
+      font-style: italic;
+      font-size: 0.75rem;
+      color: var(--grey-mid);
+      line-height: 1.5;
+      margin-top: 0.5rem;
+    }
+    .dashboard-side {
+      padding-top: 0.5rem;
+    }
+    .dashboard-menu-title {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey-light);
+      margin-bottom: 0.5rem;
+    }
+    .menu-item {
+      padding: 0.45rem 0;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--grey-mid);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item.active { color: var(--dark); }
+    .menu-item:not(.active) { opacity: 0.35; }
+    .menu-indicator {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+    }
+    .menu-item.active .menu-indicator { background: var(--green-primary); }
+    .menu-item:not(.active) .menu-indicator { background: var(--grey-light); }
+    .dashboard-source {
+      font-size: 0.65rem;
+      color: var(--grey-light);
+      font-style: italic;
+      margin-top: 0.8rem;
+      max-width: 850px;
+    }
+
+    /* ─── SLIDE 4: FOCUS ITEMS ─── */
     .focus-items {
-      max-width: 500px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 900px;
     }
     .focus-item {
-      margin-bottom: 1rem;
+      margin-bottom: 0;
       padding-left: 1rem;
       border-left: 2px solid var(--green-primary);
     }
@@ -219,39 +350,51 @@
       line-height: 1.5;
     }
 
-    /* Throughline slide (slide 4) */
-    .mini-timeline {
-      display: flex;
-      gap: 1.2rem;
-      margin-top: 1.5rem;
-      max-width: 400px;
+    /* ─── SLIDE 5: THROUGHLINE ─── */
+    .timeline-phases {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 820px;
+      margin-bottom: 1.5rem;
     }
-    .mini-phase { flex: 1; }
-    .mini-phase-bar {
-      height: 2px;
-      margin-bottom: 0.5rem;
+    .timeline-phase {
+      margin-bottom: 0;
+      padding-left: 1rem;
+      border-left: 2px solid var(--green-primary);
     }
-    .mini-phase:nth-child(1) .mini-phase-bar { background: var(--green-primary); }
-    .mini-phase:nth-child(2) .mini-phase-bar { background: var(--blue-primary); }
-    .mini-phase:nth-child(3) .mini-phase-bar { background: var(--yellow); }
-    .mini-phase-label {
+    .timeline-phase:nth-child(2) { border-left-color: var(--blue-primary); }
+    .timeline-phase:nth-child(3) { border-left-color: var(--yellow); }
+    .phase-range {
       font-size: 0.65rem;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--grey-light);
-      margin-bottom: 0.15rem;
+      margin-bottom: 0.1rem;
     }
-    .mini-phase-name {
+    .phase-name {
       font-family: 'Cormorant', serif;
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       font-weight: 500;
       color: var(--dark);
+      margin-bottom: 0.15rem;
+    }
+    .phase-detail {
+      font-size: 0.82rem;
+      color: var(--grey-mid);
+      line-height: 1.5;
+    }
+    .closing-text {
+      font-size: 0.95rem;
+      color: var(--grey-dark);
+      line-height: 1.8;
+      max-width: 520px;
+      margin-bottom: 1rem;
     }
     .contact-links {
       display: flex;
       gap: 0.8rem;
-      margin-top: 1.5rem;
     }
     .contact-link {
       display: inline-block;
@@ -278,7 +421,9 @@
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      padding-top: 0.5rem;
+      padding: 0.8rem 0 1.2rem;
+      width: 100%;
+      max-width: 1100px;
     }
     .carousel-arrow {
       background: none;
@@ -325,171 +470,33 @@
       letter-spacing: 0.05em;
     }
 
-    /* ─── DASHBOARD COLUMN ─── */
-    .dashboard-col {
-      background: var(--creme);
-      display: flex;
-      flex-direction: column;
-      padding: 2rem 2rem 1.5rem;
-      overflow-y: auto;
-    }
-    .dashboard-header {
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--green-primary);
-      margin-bottom: 1.2rem;
-    }
-    .dashboard-panel {
-      background: var(--white);
-      border: 1px solid var(--border);
-      padding: 1.3rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .dashboard-panel h3 {
-      font-family: 'Cormorant', serif;
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--dark);
-      margin-bottom: 1rem;
-    }
-
-    /* Alignment matrix */
-    .alignment-matrix {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 0.8rem;
-    }
-    .alignment-matrix th {
-      font-family: 'Karla', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--grey-mid);
-      padding: 0.35rem 0.4rem;
-      text-align: center;
-    }
-    .alignment-matrix th:first-child {
-      text-align: left;
-      min-width: 110px;
-    }
-    .alignment-matrix td {
-      padding: 0.35rem 0.4rem;
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
-    .alignment-matrix td:first-child {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--dark);
-      text-align: left;
-    }
-    .alignment-cell {
-      display: inline-block;
-      width: 26px;
-      height: 13px;
-    }
-    .alignment-cell.strong { background: var(--green-primary); }
-    .alignment-cell.moderate { background: var(--green-primary); opacity: 0.5; }
-    .alignment-cell.minimal { background: var(--green-primary); opacity: 0.15; }
-    .matrix-legend {
-      display: flex;
-      gap: 0.8rem;
-      margin-bottom: 0.6rem;
-      font-size: 0.65rem;
-      color: var(--grey-mid);
-      align-items: center;
-    }
-    .matrix-legend span {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-    .legend-swatch {
-      display: inline-block;
-      width: 12px;
-      height: 7px;
-    }
-    .matrix-insight {
-      font-style: italic;
-      font-size: 0.75rem;
-      color: var(--grey-mid);
-      line-height: 1.5;
-      margin-top: 0.5rem;
-    }
-
-    /* Dashboard menu (greyed items) */
-    .dashboard-menu {
-      margin-top: auto;
-      padding-top: 1rem;
-    }
-    .dashboard-menu-title {
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--grey-light);
-      margin-bottom: 0.5rem;
-    }
-    .menu-item {
-      padding: 0.45rem 0;
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--grey-mid);
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .menu-item:last-child { border-bottom: none; }
-    .menu-item.active { color: var(--dark); }
-    .menu-item:not(.active) { opacity: 0.35; }
-    .menu-indicator {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-    }
-    .menu-item.active .menu-indicator { background: var(--green-primary); }
-    .menu-item:not(.active) .menu-indicator { background: var(--grey-light); }
-
-    .dashboard-source {
-      font-size: 0.65rem;
-      color: var(--grey-light);
-      font-style: italic;
-      margin-top: 0.8rem;
-    }
-
     /* ─── RESPONSIVE ─── */
-    @media (max-width: 1100px) {
-      .carousel-col { padding: 2rem 2.5rem 1rem; }
-      .slide h1 { font-size: 2.1rem; }
-      .slide h2 { font-size: 1.7rem; }
-    }
-
     @media (max-width: 900px) {
       body { height: auto; overflow-y: auto; overflow-x: hidden; }
-      .page {
-        height: auto;
+      .page { height: auto; min-height: calc(100vh - 56px); }
+      .carousel-wrap { min-height: 65vh; }
+      .slide h1 { font-size: 2rem; }
+      .slide h2 { font-size: 1.5rem; }
+      .experience-items { grid-template-columns: 1fr; }
+      .focus-items { grid-template-columns: 1fr; }
+      .timeline-phases { grid-template-columns: 1fr; }
+      .dashboard-slide-inner {
         grid-template-columns: 1fr;
       }
-      .carousel-col {
-        min-height: 75vh;
-        padding: 2rem;
+      .dashboard-side {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 1.2rem;
       }
-      .carousel-wrap { min-height: 55vh; }
-      .dashboard-col { padding: 2rem; }
-      .slide h1 { font-size: 2rem; }
+      .dashboard-menu-title { width: 100%; }
+      .menu-item { border-bottom: none; font-size: 0.72rem; }
     }
 
     @media (max-width: 600px) {
-      .carousel-col { padding: 1.5rem; min-height: 70vh; }
+      .page { padding: 0 1.2rem; }
       .slide h1 { font-size: 1.7rem; }
       .slide h2 { font-size: 1.5rem; }
-      .carousel-wrap { min-height: 50vh; }
-      .mini-timeline { flex-direction: column; gap: 0.6rem; }
+      .carousel-wrap { min-height: 55vh; }
       .contact-links { flex-direction: column; }
       .contact-link { text-align: center; }
 
@@ -519,6 +526,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a data-slide="1">What I bring</a></li>
         <li><a data-slide="2">How I think</a></li>
+        <li><a data-slide="3">Where I'd start</a></li>
         <li><a href="mailto:immyfeenan@gmail.com">Contact</a></li>
       </ul>
     </div>
@@ -526,199 +534,193 @@
 
   <!-- PAGE -->
   <main class="page">
+    <div class="carousel-wrap">
 
-    <!-- LEFT: CAROUSEL -->
-    <div class="carousel-col">
-      <div class="carousel-wrap">
-
-        <!-- Slide 1: Enthusiasm & interest -->
-        <div class="slide active" data-index="0">
-          <div class="slide-label">Enthusiasm &amp; interest</div>
-          <h1>Catalyzing CCAI's<br>strategic ambitions</h1>
-          <p>I know I am more of a wildcard candidate with more corporate sustainability programme management and operations experience. I want to show you what I'd bring to this role and express my enthusiasm for the work CCAI does.</p>
-          <span class="slide-role">Director of Operations &amp; Projects — Climate Change AI</span>
-        </div>
-
-        <!-- Slide 2: What I bring -->
-        <div class="slide" data-index="1">
-          <div class="slide-label">What I bring</div>
-          <h2>What I bring to this</h2>
-          <div class="experience-items">
-            <div class="experience-item">
-              <div class="experience-item-title">Volunteer CRM &amp; coordination systems</div>
-              <div class="experience-item-desc">I developed a policy and advocacy campaigns hub for IKEA that empowered their country teams to develop locally relevant advocacy campaigns.</div>
-            </div>
-            <div class="experience-item">
-              <div class="experience-item-title">Programmatic impact dashboards</div>
-              <div class="experience-item-desc">I have developed sustainability and social impact reporting frameworks for corporate clients that look at outputs, outcomes, and impact.</div>
-            </div>
-            <div class="experience-item">
-              <div class="experience-item-title">Decision science for resource allocation</div>
-              <div class="experience-item-desc">My current independent research is integrating decision science (AHP-TOPSIS) into the materiality assessment process for corporate sustainability.</div>
-            </div>
-            <div class="experience-item">
-              <div class="experience-item-title">Independent, remote, self-directed</div>
-              <div class="experience-item-desc">I've worked independently across UK, European, and South African contexts for years.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Slide 3: How I think -->
-        <div class="slide" data-index="2">
-          <div class="slide-label">How I think</div>
-          <h2>Three areas of initial focus</h2>
-          <p style="font-size: 0.82rem; color: var(--grey-mid); margin-bottom: 1.2rem; max-width: 460px;">Based on CCAI's public work, team structure, and the JD for this role.</p>
-          <div class="focus-items">
-            <div class="focus-item">
-              <div class="focus-stat">50+ volunteers · 5 continents</div>
-              <div class="focus-title">Volunteer coordination infrastructure</div>
-              <div class="focus-desc">A well-designed volunteer CRM, onboarding and task / contribution tracking system would reduce contributor burden as well as allow smoother tracking of activities for CCAI staff.</div>
-            </div>
-            <div class="focus-item">
-              <div class="focus-stat">4 programme streams · 23 projects</div>
-              <div class="focus-title">Programmatic impact tracking</div>
-              <div class="focus-desc">Tracking the different impact metrics and mapping those to the strategic direction of the organization is essential to improve decision-making around resource allocation.</div>
-            </div>
-            <div class="focus-item">
-              <div class="focus-stat">501(c)(3) since 2021</div>
-              <div class="focus-title">Back-end infrastructure for scale</div>
-              <div class="focus-desc">Reviewing the legal and financial structure and processes. Ensuring the foundational elements of operations are set up in a way that isn't creating friction for staff or core team.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Slide 4: The throughline -->
-        <div class="slide" data-index="3">
-          <div class="slide-label">The throughline</div>
-          <h2>If this brief is useful, I'd love to continue the conversation.</h2>
-          <p>I'm genuinely excited about what CCAI is building and confident I can help it run better. I'd welcome the chance to discuss these ideas further.</p>
-          <div class="mini-timeline">
-            <div class="mini-phase">
-              <div class="mini-phase-bar"></div>
-              <div class="mini-phase-label">Days 1–30</div>
-              <div class="mini-phase-name">Learn</div>
-            </div>
-            <div class="mini-phase">
-              <div class="mini-phase-bar"></div>
-              <div class="mini-phase-label">Days 31–60</div>
-              <div class="mini-phase-name">Design</div>
-            </div>
-            <div class="mini-phase">
-              <div class="mini-phase-bar"></div>
-              <div class="mini-phase-label">Days 61–90</div>
-              <div class="mini-phase-name">Build</div>
-            </div>
-          </div>
-          <div class="contact-links">
-            <a href="https://imogenfeenan.com" class="contact-link">imogenfeenan.com</a>
-            <a href="mailto:immyfeenan@gmail.com" class="contact-link">Email me</a>
-          </div>
-          <div class="contact-location">Cape Town, South Africa (GMT+2) · Available for remote work globally</div>
-        </div>
-
+      <!-- Slide 1: Enthusiasm & interest -->
+      <div class="slide active" data-index="0">
+        <div class="slide-label">Enthusiasm &amp; interest</div>
+        <h1>Catalyzing CCAI's<br>strategic ambitions</h1>
+        <p>I help organisations make better decisions about where to put their energy. My background is in sustainability programme management and operations across corporate, nonprofit and research contexts. It's a different profile to what you might expect for this role. I think that's a strength.</p>
+        <span class="slide-role">Director of Operations &amp; Projects — Climate Change AI</span>
       </div>
 
-      <!-- Controls -->
-      <div class="carousel-controls">
-        <button class="carousel-arrow carousel-prev" aria-label="Previous slide" disabled>&#8592;</button>
-        <div class="carousel-dots">
-          <button class="carousel-dot active" data-dot="0" aria-label="Slide 1"></button>
-          <button class="carousel-dot" data-dot="1" aria-label="Slide 2"></button>
-          <button class="carousel-dot" data-dot="2" aria-label="Slide 3"></button>
-          <button class="carousel-dot" data-dot="3" aria-label="Slide 4"></button>
+      <!-- Slide 2: What I bring -->
+      <div class="slide" data-index="1">
+        <div class="slide-label">What I bring</div>
+        <h2>What I bring to this</h2>
+        <div class="experience-items">
+          <div class="experience-item">
+            <div class="experience-item-title">Volunteer coordination systems</div>
+            <div class="experience-item-desc">I built a policy and advocacy hub for IKEA that empowered 30+ country teams to run locally relevant campaigns. CCAI's 50+ volunteer network across five continents is a similar coordination challenge.</div>
+          </div>
+          <div class="experience-item">
+            <div class="experience-item-title">Programmatic impact tracking</div>
+            <div class="experience-item-desc">I've developed sustainability reporting frameworks that connect outputs to outcomes to impact. This is what's needed to track whether CCAI's programmes are moving the needle on its strategic goals.</div>
+          </div>
+          <div class="experience-item">
+            <div class="experience-item-title">Decision science for resource allocation</div>
+            <div class="experience-item-desc">My independent research integrates structured decision methods (AHP-TOPSIS) into how organisations prioritise competing demands. This is the lens I'd bring to how CCAI allocates time, funding and attention across its portfolio.</div>
+          </div>
+          <div class="experience-item">
+            <div class="experience-item-title">Independent, remote, self-directed</div>
+            <div class="experience-item-desc">I've worked across UK, European and South African contexts for years. I know how to build structure and keep things moving without needing to be in the room.</div>
+          </div>
         </div>
-        <button class="carousel-arrow carousel-next" aria-label="Next slide">&#8594;</button>
-        <span class="carousel-counter">1 / 4</span>
       </div>
+
+      <!-- Slide 3: Dashboard -->
+      <div class="slide" data-index="2">
+        <div class="slide-label">How I think</div>
+        <div class="dashboard-slide-inner">
+          <div class="dashboard-panel">
+            <h3>Programme alignment to strategic goals</h3>
+            <div class="matrix-legend">
+              <span><span class="legend-swatch" style="background: var(--green-primary);"></span> Strong</span>
+              <span><span class="legend-swatch" style="background: var(--green-primary); opacity: 0.5;"></span> Moderate</span>
+              <span><span class="legend-swatch" style="background: var(--green-primary); opacity: 0.15;"></span> Minimal</span>
+            </div>
+            <table class="alignment-matrix">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Grants</th>
+                  <th>Events</th>
+                  <th>Summer School</th>
+                  <th>Policy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Expertise</td>
+                  <td><span class="alignment-cell strong"></span></td>
+                  <td><span class="alignment-cell strong"></span></td>
+                  <td><span class="alignment-cell strong"></span></td>
+                  <td><span class="alignment-cell moderate"></span></td>
+                </tr>
+                <tr>
+                  <td>Education</td>
+                  <td><span class="alignment-cell moderate"></span></td>
+                  <td><span class="alignment-cell moderate"></span></td>
+                  <td><span class="alignment-cell strong"></span></td>
+                  <td><span class="alignment-cell strong"></span></td>
+                </tr>
+                <tr>
+                  <td>Coordination</td>
+                  <td><span class="alignment-cell moderate"></span></td>
+                  <td><span class="alignment-cell strong"></span></td>
+                  <td><span class="alignment-cell moderate"></span></td>
+                  <td><span class="alignment-cell strong"></span></td>
+                </tr>
+                <tr>
+                  <td>Research-to-deployment</td>
+                  <td><span class="alignment-cell strong"></span></td>
+                  <td><span class="alignment-cell moderate"></span></td>
+                  <td><span class="alignment-cell minimal"></span></td>
+                  <td><span class="alignment-cell strong"></span></td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="matrix-insight">Observation: Research-to-deployment alignment is concentrated in Grants and Policy. Events and Summer School may be under-leveraged for bridging research into practice.</p>
+          </div>
+          <div class="dashboard-side">
+            <div class="dashboard-menu-title">Dashboard views</div>
+            <div class="menu-item active">
+              <span class="menu-indicator"></span> Programme alignment
+            </div>
+            <div class="menu-item">
+              <span class="menu-indicator"></span> Programme health
+            </div>
+            <div class="menu-item">
+              <span class="menu-indicator"></span> Staff &amp; capacity
+            </div>
+            <div class="menu-item">
+              <span class="menu-indicator"></span> Budget allocation
+            </div>
+            <div class="menu-item">
+              <span class="menu-indicator"></span> Leadership decisions
+            </div>
+          </div>
+        </div>
+        <p class="dashboard-source">Prototype with illustrative data. A working version would connect to CCAI's project management, financial, and CRM systems.</p>
+      </div>
+
+      <!-- Slide 4: Where I'd start -->
+      <div class="slide" data-index="3">
+        <div class="slide-label">Where I'd start</div>
+        <h2>Three areas of initial focus</h2>
+        <p style="font-size: 0.82rem; color: var(--grey-mid); margin-bottom: 1.2rem; max-width: 460px;">Based on CCAI's public work, team structure, and the JD for this role.</p>
+        <div class="focus-items">
+          <div class="focus-item">
+            <div class="focus-stat">50+ volunteers · 5 continents</div>
+            <div class="focus-title">Volunteer coordination infrastructure</div>
+            <div class="focus-desc">A volunteer CRM, onboarding and task tracking system would reduce contributor burden and allow smoother tracking for staff.</div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-stat">4 programme streams · 23 projects</div>
+            <div class="focus-title">Programmatic impact tracking</div>
+            <div class="focus-desc">Tracking impact metrics across streams and mapping them to strategic goals is essential for resource allocation decisions.</div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-stat">501(c)(3) since 2021</div>
+            <div class="focus-title">Back-end infrastructure for scale</div>
+            <div class="focus-desc">Reviewing legal and financial structures to ensure they aren't creating friction for staff or core team.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: The throughline -->
+      <div class="slide" data-index="4">
+        <div class="slide-label">The throughline</div>
+        <div class="timeline-phases">
+          <div class="timeline-phase">
+            <div class="phase-range">Days 1–30</div>
+            <div class="phase-name">Learn</div>
+            <div class="phase-detail">Map every programme, process and relationship. Understand where the friction is.</div>
+          </div>
+          <div class="timeline-phase">
+            <div class="phase-range">Days 31–60</div>
+            <div class="phase-name">Design</div>
+            <div class="phase-detail">Propose the systems, workflows and tracking structures that would make the biggest difference.</div>
+          </div>
+          <div class="timeline-phase">
+            <div class="phase-range">Days 61–90</div>
+            <div class="phase-name">Build</div>
+            <div class="phase-detail">Start implementing, starting with whatever creates the most immediate relief for the team.</div>
+          </div>
+        </div>
+        <p class="closing-text">I'm super excited about what CCAI is building and confident I can help it run brilliantly. I'd welcome the chance to talk.</p>
+        <div class="contact-links">
+          <a href="https://imogenfeenan.com" class="contact-link">imogenfeenan.com</a>
+          <a href="mailto:immyfeenan@gmail.com" class="contact-link">Email me</a>
+        </div>
+        <div class="contact-location">Cape Town, South Africa (GMT+2) · Available for remote work globally</div>
+      </div>
+
     </div>
 
-    <!-- RIGHT: DASHBOARD -->
-    <div class="dashboard-col">
-      <div class="dashboard-header">Strategic operations dashboard</div>
-
-      <div class="dashboard-panel">
-        <h3>Programme alignment to strategic goals</h3>
-        <div class="matrix-legend">
-          <span><span class="legend-swatch" style="background: var(--green-primary);"></span> Strong</span>
-          <span><span class="legend-swatch" style="background: var(--green-primary); opacity: 0.5;"></span> Moderate</span>
-          <span><span class="legend-swatch" style="background: var(--green-primary); opacity: 0.15;"></span> Minimal</span>
-        </div>
-        <table class="alignment-matrix">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Grants</th>
-              <th>Events</th>
-              <th>Summer School</th>
-              <th>Policy</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Expertise</td>
-              <td><span class="alignment-cell strong"></span></td>
-              <td><span class="alignment-cell strong"></span></td>
-              <td><span class="alignment-cell strong"></span></td>
-              <td><span class="alignment-cell moderate"></span></td>
-            </tr>
-            <tr>
-              <td>Education</td>
-              <td><span class="alignment-cell moderate"></span></td>
-              <td><span class="alignment-cell moderate"></span></td>
-              <td><span class="alignment-cell strong"></span></td>
-              <td><span class="alignment-cell strong"></span></td>
-            </tr>
-            <tr>
-              <td>Coordination</td>
-              <td><span class="alignment-cell moderate"></span></td>
-              <td><span class="alignment-cell strong"></span></td>
-              <td><span class="alignment-cell moderate"></span></td>
-              <td><span class="alignment-cell strong"></span></td>
-            </tr>
-            <tr>
-              <td>Research-to-deployment</td>
-              <td><span class="alignment-cell strong"></span></td>
-              <td><span class="alignment-cell moderate"></span></td>
-              <td><span class="alignment-cell minimal"></span></td>
-              <td><span class="alignment-cell strong"></span></td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="matrix-insight">Observation: Research-to-deployment alignment is concentrated in Grants and Policy. Events and Summer School may be under-leveraged for bridging research into practice.</p>
+    <!-- Controls -->
+    <div class="carousel-controls">
+      <button class="carousel-arrow carousel-prev" aria-label="Previous slide" disabled>&#8592;</button>
+      <div class="carousel-dots">
+        <button class="carousel-dot active" data-dot="0" aria-label="Slide 1"></button>
+        <button class="carousel-dot" data-dot="1" aria-label="Slide 2"></button>
+        <button class="carousel-dot" data-dot="2" aria-label="Slide 3"></button>
+        <button class="carousel-dot" data-dot="3" aria-label="Slide 4"></button>
+        <button class="carousel-dot" data-dot="4" aria-label="Slide 5"></button>
       </div>
-
-      <div class="dashboard-menu">
-        <div class="dashboard-menu-title">Dashboard views</div>
-        <div class="menu-item active">
-          <span class="menu-indicator"></span> Programme alignment
-        </div>
-        <div class="menu-item">
-          <span class="menu-indicator"></span> Programme health
-        </div>
-        <div class="menu-item">
-          <span class="menu-indicator"></span> Staff &amp; volunteer capacity
-        </div>
-        <div class="menu-item">
-          <span class="menu-indicator"></span> Budget vs. strategic weight
-        </div>
-        <div class="menu-item">
-          <span class="menu-indicator"></span> Leadership decisions
-        </div>
-      </div>
-
-      <p class="dashboard-source">Prototype dashboard with illustrative data. A working version would connect to CCAI's project management, financial, and CRM systems.</p>
+      <button class="carousel-arrow carousel-next" aria-label="Next slide">&#8594;</button>
+      <span class="carousel-counter">1 / 5</span>
     </div>
-
   </main>
 
   <script>
     // ─── CAROUSEL ───
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.carousel-dot');
-    const prevBtn = document.querySelector('.carousel-prev');
-    const nextBtn = document.querySelector('.carousel-next');
-    const counter = document.querySelector('.carousel-counter');
-    let current = 0;
+    var slides = document.querySelectorAll('.slide');
+    var dots = document.querySelectorAll('.carousel-dot');
+    var prevBtn = document.querySelector('.carousel-prev');
+    var nextBtn = document.querySelector('.carousel-next');
+    var counter = document.querySelector('.carousel-counter');
+    var current = 0;
 
     function goToSlide(n) {
       slides[current].classList.remove('active');
@@ -752,7 +754,6 @@
       link.addEventListener('click', function(e) {
         e.preventDefault();
         goToSlide(parseInt(link.dataset.slide));
-        // Close mobile menu if open
         document.getElementById('menuToggle').classList.remove('active');
         document.getElementById('navLinks').classList.remove('open');
       });
